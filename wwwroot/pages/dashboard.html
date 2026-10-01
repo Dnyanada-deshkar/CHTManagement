@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CHT Management - Dashboard</title>
+</head>
+<body>
+
+    <h1>CHT Management Dashboard</h1>
+
+    <p id="welcome"></p>
+
+    <button id="logoutBtn">Logout</button>
+
+    <script>
+
+        const token = sessionStorage.getItem("token");
+        const username = sessionStorage.getItem("username");
+        const role = sessionStorage.getItem("role");
+
+        if (!token) {
+            window.location.href = "/pages/login.html";
+        } else {
+            document.getElementById("welcome").textContent =
+                `Welcome ${username} (${role})`;
+        }
+
+        document.getElementById("logoutBtn")
+            .addEventListener("click", function () {
+
+                sessionStorage.removeItem("token");
+                sessionStorage.removeItem("username");
+                sessionStorage.removeItem("role");
+
+                window.location.href = "/pages/login.html";
+            });
+
+    </script>
+
+</body>
+</html>

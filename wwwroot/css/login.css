@@ -1,0 +1,514 @@
+﻿/* =========================================================
+   CHT MANAGEMENT SYSTEM
+   LOGIN PAGE
+   ========================================================= */
+
+/* ---------- Base ---------- */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    min-height: 100%;
+}
+
+body {
+    font-family: "Segoe UI", Arial, Helvetica, sans-serif;
+    background: linear-gradient( 135deg, #111a15 0%, #1a281f 45%, #0c120f 100% );
+    color: #ffffff;
+    overflow-x: hidden;
+}
+
+
+/* ---------- Page ---------- */
+
+.login-page {
+    position: relative;
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    background: linear-gradient( 180deg, rgba(19, 34, 25, 0.94) 0%, rgba(18, 28, 22, 0.90) 45%, rgba(5, 10, 8, 0.98) 100% );
+    overflow: hidden;
+}
+
+
+    /*
+   IMPORTANT:
+   This is the visual fallback background.
+   Replace /assets/login-bg.jpg with the actual
+   mountain/background image when you have it.
+*/
+
+    .login-page::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image: url("/assets/login-bg.jpg");
+        background-size: cover;
+        background-position: center;
+        opacity: 0.78;
+        z-index: 0;
+    }
+
+
+/* Dark image treatment */
+
+.page-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient( 180deg, rgba(9, 17, 12, 0.38), rgba(8, 14, 10, 0.72) );
+    backdrop-filter: blur(1px);
+    z-index: 1;
+}
+
+
+/* ---------- Content ---------- */
+
+.login-content {
+    position: relative;
+    z-index: 2;
+    width: min(100%, 430px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    animation: pageEnter 0.7s ease-out;
+}
+
+
+/* ---------- Brand ---------- */
+
+.brand-section {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 26px;
+}
+
+
+/* Temporary emblem created in CSS.
+   Replace with actual logo image later. */
+
+.brand-emblem {
+    position: relative;
+    width: 62px;
+    height: 62px;
+    margin: 0 auto 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.emblem-line {
+    position: absolute;
+    width: 5px;
+    height: 52px;
+    background: linear-gradient( 180deg, #d2c49b, #857a57 );
+    border-radius: 4px;
+    box-shadow: 0 0 6px rgba(214, 196, 145, 0.15);
+}
+
+
+.emblem-line-left {
+    transform: rotate(-32deg);
+}
+
+
+.emblem-line-right {
+    transform: rotate(32deg);
+}
+
+
+.emblem-center {
+    position: relative;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #d2c49b;
+    border: 3px solid #172119;
+    z-index: 2;
+}
+
+
+.brand-unit {
+    margin-bottom: 4px;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 1.7px;
+    color: #f2efe5;
+    text-transform: uppercase;
+}
+
+
+.brand-section h1 {
+    font-size: clamp(25px, 5vw, 34px);
+    line-height: 1.08;
+    font-weight: 700;
+    letter-spacing: 1.4px;
+    color: #ffffff;
+    text-transform: uppercase;
+    text-shadow: 0 2px 14px rgba(0, 0, 0, 0.4);
+}
+
+
+.tagline {
+    margin-top: 7px;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 0.4px;
+    color: rgba(255, 255, 255, 0.82);
+}
+
+
+/* ---------- Login Card ---------- */
+
+.login-card {
+    width: 100%;
+    padding: 30px 32px 27px;
+    background: linear-gradient( 145deg, rgba(25, 37, 30, 0.88), rgba(11, 18, 14, 0.91) );
+    border: 1px solid rgba(214, 220, 207, 0.18);
+    border-radius: 8px;
+    box-shadow: 0 22px 50px rgba(0, 0, 0, 0.38), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(10px);
+}
+
+
+.login-card-header {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+
+    .login-card-header h2 {
+        font-size: 17px;
+        font-weight: 500;
+        letter-spacing: 0.25px;
+        color: #f0f2ed;
+    }
+
+
+/* ---------- Form ---------- */
+
+.form-group {
+    margin-bottom: 17px;
+}
+
+
+    .form-group label {
+        display: block;
+        margin-bottom: 7px;
+        font-size: 12px;
+        font-weight: 500;
+        letter-spacing: 0.25px;
+        color: rgba(255, 255, 255, 0.78);
+    }
+
+
+.input-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+
+    .input-wrapper input {
+        width: 100%;
+        height: 48px;
+        padding: 0 44px 0 43px;
+        border: 1px solid rgba(206, 217, 207, 0.22);
+        border-radius: 5px;
+        outline: none;
+        font-family: inherit;
+        font-size: 14px;
+        color: #ffffff;
+        background: rgba(15, 25, 19, 0.82);
+        transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+    }
+
+
+        .input-wrapper input::placeholder {
+            color: rgba(255, 255, 255, 0.42);
+        }
+
+
+        .input-wrapper input:hover {
+            border-color: rgba(206, 217, 207, 0.35);
+        }
+
+
+        .input-wrapper input:focus {
+            border-color: rgba(151, 177, 148, 0.85);
+            background: rgba(17, 28, 21, 0.95);
+            box-shadow: 0 0 0 3px rgba(102, 131, 105, 0.14);
+        }
+
+
+.input-icon {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 18px;
+    height: 18px;
+    color: rgba(218, 226, 215, 0.65);
+    pointer-events: none;
+}
+
+
+    .input-icon svg {
+        width: 100%;
+        height: 100%;
+    }
+
+
+/* ---------- Password Toggle ---------- */
+
+.password-toggle {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 30px;
+    height: 30px;
+    border: none;
+    background: transparent;
+    color: rgba(218, 226, 215, 0.55);
+    cursor: pointer;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.2s ease, background 0.2s ease;
+}
+
+
+    .password-toggle:hover {
+        color: #ffffff;
+        background: rgba(255, 255, 255, 0.06);
+    }
+
+
+    .password-toggle svg {
+        width: 18px;
+        height: 18px;
+    }
+
+
+/* ---------- Error / Success Message ---------- */
+
+.login-message {
+    min-height: 18px;
+    margin: -2px 0 10px;
+    font-size: 12px;
+    line-height: 1.4;
+    text-align: center;
+    color: #e4a3a3;
+}
+
+
+/* ---------- Login Button ---------- */
+
+.login-button {
+    position: relative;
+    width: 100%;
+    height: 47px;
+    margin-top: 2px;
+    border: 1px solid rgba(197, 215, 194, 0.14);
+    border-radius: 5px;
+    outline: none;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    color: #ffffff;
+    background: linear-gradient( 180deg, #627b61 0%, #4c644d 100% );
+    box-shadow: 0 7px 18px rgba(0, 0, 0, 0.18);
+    transition: transform 0.18s ease, filter 0.18s ease, box-shadow 0.18s ease;
+}
+
+
+    .login-button:hover {
+        filter: brightness(1.08);
+        box-shadow: 0 9px 22px rgba(0, 0, 0, 0.25);
+        transform: translateY(-1px);
+    }
+
+
+    .login-button:active {
+        transform: translateY(0);
+    }
+
+
+    .login-button:disabled {
+        cursor: not-allowed;
+        opacity: 0.72;
+        transform: none;
+    }
+
+
+/* ---------- Loader ---------- */
+
+.button-loader {
+    display: none;
+    width: 17px;
+    height: 17px;
+    border: 2px solid rgba(255, 255, 255, 0.35);
+    border-top-color: #ffffff;
+    border-radius: 50%;
+    animation: spin 0.75s linear infinite;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
+.login-button.loading .button-text {
+    visibility: hidden;
+}
+
+
+.login-button.loading .button-loader {
+    display: block;
+}
+
+
+/* ---------- Forgot Password ---------- */
+
+.forgot-password {
+    display: block;
+    margin: 17px auto 0;
+    padding: 0;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 12px;
+    color: rgba(235, 237, 230, 0.68);
+    transition: color 0.2s ease;
+}
+
+
+    .forgot-password:hover {
+        color: #ffffff;
+    }
+
+
+/* ---------- Footer ---------- */
+
+.login-footer {
+    margin-top: 26px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 1.9px;
+    color: rgba(255, 255, 255, 0.48);
+}
+
+
+.footer-separator {
+    color: rgba(215, 220, 211, 0.25);
+}
+
+
+/* ---------- Focus Accessibility ---------- */
+
+button:focus-visible,
+input:focus-visible {
+    outline: 2px solid rgba(208, 217, 203, 0.75);
+    outline-offset: 2px;
+}
+
+
+/* ---------- Animations ---------- */
+
+@keyframes pageEnter {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+@keyframes spin {
+    to {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 520px) {
+
+    .login-page {
+        padding: 28px 16px;
+    }
+
+    .login-card {
+        padding: 25px 21px 23px;
+    }
+
+    .brand-section {
+        margin-bottom: 21px;
+    }
+
+        .brand-section h1 {
+            font-size: 25px;
+            letter-spacing: 1px;
+        }
+
+    .brand-unit {
+        font-size: 12px;
+        letter-spacing: 1.4px;
+    }
+
+    .tagline {
+        font-size: 13px;
+    }
+
+    .login-footer {
+        margin-top: 20px;
+    }
+}
+
+
+@media (max-height: 700px) {
+
+    .login-page {
+        padding: 24px 20px;
+    }
+
+    .brand-emblem {
+        width: 52px;
+        height: 52px;
+        margin-bottom: 6px;
+    }
+
+        .brand-emblem .emblem-line {
+            height: 44px;
+        }
+
+    .brand-section {
+        margin-bottom: 16px;
+    }
+
+    .login-card {
+        padding: 23px 28px;
+    }
+}

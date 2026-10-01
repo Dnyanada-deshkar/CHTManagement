@@ -1,0 +1,197 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CHT Management System - Login</title>
+
+    <link rel="stylesheet" href="/css/login.css">
+</head>
+
+<body>
+
+    <main class="login-page">
+
+        <!-- Background Overlay -->
+        <div class="page-overlay"></div>
+
+        <!-- Main Login Content -->
+        <section class="login-content">
+
+            <!-- Brand -->
+            <div class="brand-section">
+
+                <!-- Replace this with actual LEH 503 ASC BN logo later -->
+                <div class="brand-emblem" aria-hidden="true">
+                    <span class="emblem-line emblem-line-left"></span>
+                    <span class="emblem-line emblem-line-right"></span>
+                    <span class="emblem-center"></span>
+                </div>
+
+                <div class="brand-unit">
+                    LEH 503 ASC BN
+                </div>
+
+                <h1>
+                    CHT MANAGEMENT SYSTEM
+                </h1>
+
+                <p class="tagline">
+                    Efficient Transport. Stronger Operations.
+                </p>
+
+            </div>
+
+
+            <!-- Login Card -->
+            <section class="login-card">
+
+                <div class="login-card-header">
+                    <h2>Sign In to Continue</h2>
+                </div>
+
+                <form id="loginForm" novalidate>
+
+                    <!-- Username -->
+                    <div class="form-group">
+
+                        <label for="username">
+                            Username
+                        </label>
+
+                        <div class="input-wrapper">
+
+                            <span class="input-icon" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" fill="none">
+                                    <path d="M20 21a8 8 0 0 0-16 0"
+                                          stroke="currentColor"
+                                          stroke-width="1.8"
+                                          stroke-linecap="round" />
+                                    <circle cx="12"
+                                            cy="7"
+                                            r="4"
+                                            stroke="currentColor"
+                                            stroke-width="1.8" />
+                                </svg>
+                            </span>
+
+                            <input type="text"
+                                   id="username"
+                                   name="username"
+                                   placeholder="Username"
+                                   autocomplete="username"
+                                   required />
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Password -->
+                    <div class="form-group">
+
+                        <label for="password">
+                            Password
+                        </label>
+
+                        <div class="input-wrapper">
+
+                            <span class="input-icon" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" fill="none">
+                                    <rect x="4"
+                                          y="10"
+                                          width="16"
+                                          height="10"
+                                          rx="2"
+                                          stroke="currentColor"
+                                          stroke-width="1.8" />
+
+                                    <path d="M8 10V7a4 4 0 0 1 8 0v3"
+                                          stroke="currentColor"
+                                          stroke-width="1.8"
+                                          stroke-linecap="round" />
+                                </svg>
+                            </span>
+
+                            <input type="password"
+                                   id="password"
+                                   name="password"
+                                   placeholder="Password"
+                                   autocomplete="current-password"
+                                   required />
+
+                            <button type="button"
+                                    class="password-toggle"
+                                    id="passwordToggle"
+                                    aria-label="Show password">
+                                <svg id="eyeIcon"
+                                     viewBox="0 0 24 24"
+                                     fill="none">
+                                    <path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6Z"
+                                          stroke="currentColor"
+                                          stroke-width="1.7"
+                                          stroke-linejoin="round" />
+
+                                    <circle cx="12"
+                                            cy="12"
+                                            r="2.6"
+                                            stroke="currentColor"
+                                            stroke-width="1.7" />
+                                </svg>
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Error Message -->
+                    <div id="loginMessage"
+                         class="login-message"
+                         role="alert"
+                         aria-live="polite"></div>
+
+
+                    <!-- Login Button -->
+                    <button type="submit"
+                            class="login-button"
+                            id="loginButton">
+                        <span class="button-text">
+                            Login
+                        </span>
+
+                        <span class="button-loader"
+                              aria-hidden="true"></span>
+                    </button>
+
+                </form>
+
+
+                <!-- Forgot Password -->
+                <button type="button"
+                        class="forgot-password"
+                        id="forgotPassword">
+                    Forgot Password?
+                </button>
+
+            </section>
+
+
+            <!-- Footer -->
+            <div class="login-footer">
+                <span>SERVICE</span>
+                <span class="footer-separator">|</span>
+                <span>LOGISTICS</span>
+                <span class="footer-separator">|</span>
+                <span>READINESS</span>
+            </div>
+
+        </section>
+
+    </main>
+
+    <script src="/js/login.js"></script>
+
+</body>
+</html>

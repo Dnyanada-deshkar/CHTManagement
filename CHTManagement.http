@@ -1,0 +1,6 @@
+@CHTManagement_HostAddress = http://localhost:5234
+
+GET {{CHTManagement_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

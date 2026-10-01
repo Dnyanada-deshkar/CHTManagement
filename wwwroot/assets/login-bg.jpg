@@ -1,0 +1,6 @@
+﻿namespace CHTManagement.wwwroot.assets
+{
+    public class login_bg
+    {
+    }
+}
