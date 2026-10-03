@@ -12,5 +12,7 @@ namespace CHTManagement.Data
         }
 
         public DbSet<AppUser> Users { get; set; }
+
+        public DbSet<LocationType> LocationTypes { get; set; }
     }
 }
