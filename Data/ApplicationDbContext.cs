@@ -17,6 +17,8 @@ namespace CHTManagement.Data
 
         public DbSet<Location> Locations { get; set; }
 
+        public DbSet<Vehicle> Vehicles { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -30,6 +32,10 @@ namespace CHTManagement.Data
                 .WithMany()
                 .HasForeignKey(x => x.LocationTypeId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Vehicle>()
+                .HasIndex(x => x.VehicleCode)
+                .IsUnique();
         }
     }
 }

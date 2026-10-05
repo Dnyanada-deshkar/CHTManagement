@@ -1,0 +1,367 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Vehicle Master - CHT Management</title>
+
+    <link rel="stylesheet"
+          href="/css/master.css">
+</head>
+
+<body>
+
+    <div class="app-shell">
+
+        <aside class="sidebar">
+
+            <div class="sidebar-brand">
+
+                <div class="sidebar-emblem">
+                    <span></span>
+                    <span></span>
+                    <i></i>
+                </div>
+
+                <div class="brand-text">
+                    <strong>LEH 503 ASC BN</strong>
+                    <span>CHT Management System</span>
+                </div>
+
+            </div>
+
+
+            <nav class="sidebar-nav">
+
+                <a href="/pages/dashboard.html"
+                   class="nav-item">
+                    <span class="nav-icon">⌂</span>
+                    <span>Dashboard</span>
+                </a>
+
+
+                <div class="nav-section-title">
+                    MASTERS
+                </div>
+
+
+                <a href="/pages/location-type-master.html"
+                   class="nav-item">
+                    <span class="nav-icon">▦</span>
+                    <span>Location Type Master</span>
+                </a>
+
+
+                <a href="/pages/location-master.html"
+                   class="nav-item">
+                    <span class="nav-icon">⌖</span>
+                    <span>Location Master</span>
+                </a>
+
+
+                <a href="/pages/vehicle-master.html"
+                   class="nav-item active">
+                    <span class="nav-icon">▣</span>
+                    <span>Vehicle Master</span>
+                </a>
+
+            </nav>
+
+
+            <div class="sidebar-footer">
+                <span>CHT MANAGEMENT</span>
+                <small>Internal Operations</small>
+            </div>
+
+        </aside>
+
+
+        <main class="main-area">
+
+            <header class="topbar">
+
+                <button type="button"
+                        class="menu-button"
+                        id="menuButton">
+                    ☰
+                </button>
+
+
+                <div class="topbar-right">
+
+                    <div class="user-profile">
+
+                        <div class="user-avatar">
+                            <span id="userInitial">U</span>
+                        </div>
+
+                        <div class="user-info">
+
+                            <strong id="headerUsername">
+                                User
+                            </strong>
+
+                            <span id="headerRole">
+                                -
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </header>
+
+
+            <section class="page-content">
+
+                <div class="page-heading">
+
+                    <div>
+
+                        <div class="breadcrumb">
+                            Masters
+                            <span>/</span>
+                            Vehicle Master
+                        </div>
+
+                        <h1>
+                            Vehicle Master
+                        </h1>
+
+                        <p>
+                            Manage vehicle types used in transport requirements.
+                        </p>
+
+                    </div>
+
+
+                    <button type="button"
+                            class="primary-button"
+                            id="addVehicleButton">
+                        <span class="button-plus">+</span>
+                        Add Vehicle Type
+                    </button>
+
+                </div>
+
+
+                <section class="content-card">
+
+                    <div class="card-toolbar">
+
+                        <div class="search-box">
+
+                            <span class="search-icon">
+                                ⌕
+                            </span>
+
+                            <input type="search"
+                                   id="searchInput"
+                                   placeholder="Search vehicle type..."
+                                   autocomplete="off">
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="table-wrapper">
+
+                        <table>
+
+                            <thead>
+
+                                <tr>
+
+                                    <th class="serial-column">
+                                        #
+                                    </th>
+
+                                    <th>
+                                        Vehicle Code
+                                    </th>
+
+                                    <th>
+                                        Vehicle Type
+                                    </th>
+
+                                    <th>
+                                        Status
+                                    </th>
+
+                                    <th class="action-column">
+                                        Action
+                                    </th>
+
+                                </tr>
+
+                            </thead>
+
+
+                            <tbody id="vehicleTableBody">
+
+                                <tr>
+
+                                    <td colspan="5"
+                                        class="table-state">
+                                        Loading vehicle types...
+                                    </td>
+
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+
+                    <div class="table-footer">
+
+                        <span id="recordSummary">
+                            Loading...
+                        </span>
+
+                    </div>
+
+                </section>
+
+            </section>
+
+        </main>
+
+    </div>
+
+
+    <!-- Modal -->
+
+    <div class="modal-backdrop"
+         id="vehicleModal"
+         hidden>
+
+        <div class="modal"
+             role="dialog"
+             aria-modal="true"
+             aria-labelledby="modalTitle">
+
+            <div class="modal-header">
+
+                <div>
+
+                    <span class="modal-kicker">
+                        MASTER MANAGEMENT
+                    </span>
+
+                    <h2 id="modalTitle">
+                        Add Vehicle Type
+                    </h2>
+
+                </div>
+
+
+                <button type="button"
+                        class="modal-close"
+                        id="closeModalButton">
+                    ×
+                </button>
+
+            </div>
+
+
+            <form id="vehicleForm"
+                  class="master-form">
+
+                <input type="hidden"
+                       id="vehicleId">
+
+
+                <div class="form-group">
+
+                    <label for="vehicleCode">
+                        Vehicle Code
+                    </label>
+
+                    <input type="text"
+                           id="vehicleCode"
+                           maxlength="50"
+                           placeholder="Enter vehicle code"
+                           required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="vehicleType">
+                        Vehicle Type
+                    </label>
+
+                    <input type="text"
+                           id="vehicleType"
+                           maxlength="100"
+                           placeholder="Enter vehicle type"
+                           required>
+
+                </div>
+
+
+                <div class="form-group status-group">
+
+                    <label>
+                        Status
+                    </label>
+
+                    <label class="switch-row">
+
+                        <input type="checkbox"
+                               id="isActive"
+                               checked>
+
+                        <span class="switch"></span>
+
+                        <span id="statusText">
+                            Active
+                        </span>
+
+                    </label>
+
+                </div>
+
+
+                <div class="form-message"
+                     id="formMessage"></div>
+
+
+                <div class="modal-actions">
+
+                    <button type="button"
+                            class="secondary-button"
+                            id="cancelButton">
+                        Cancel
+                    </button>
+
+
+                    <button type="submit"
+                            class="primary-button"
+                            id="saveButton">
+                        Save Vehicle Type
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <script src="/js/vehicle.js"></script>
+
+</body>
+</html>
