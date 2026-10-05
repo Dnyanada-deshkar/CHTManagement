@@ -1,0 +1,383 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Location Type Master - CHT Management</title>
+
+    <link rel="stylesheet"
+          href="/css/master.css">
+</head>
+
+<body>
+
+    <div class="app-shell">
+
+        <!-- =========================
+             SIDEBAR
+             ========================= -->
+
+        <aside class="sidebar">
+
+            <div class="sidebar-brand">
+
+                <div class="sidebar-emblem">
+                    <span></span>
+                    <span></span>
+                    <i></i>
+                </div>
+
+                <div class="brand-text">
+                    <strong>LEH 503 ASC BN</strong>
+                    <span>CHT Management System</span>
+                </div>
+
+            </div>
+
+
+            <nav class="sidebar-nav">
+
+                <a href="/pages/dashboard.html"
+                   class="nav-item">
+                    <span class="nav-icon">⌂</span>
+                    <span>Dashboard</span>
+                </a>
+
+
+                <div class="nav-section-title">
+                    MASTERS
+                </div>
+
+
+                <a href="/pages/location-type-master.html"
+                   class="nav-item active">
+                    <span class="nav-icon">▦</span>
+                    <span>Location Type Master</span>
+                </a>
+
+
+                <!-- Future master pages -->
+                <a href="#"
+                   class="nav-item disabled"
+                   aria-disabled="true">
+                    <span class="nav-icon">▣</span>
+                    <span>Location Master</span>
+                </a>
+
+
+                <a href="#"
+                   class="nav-item disabled"
+                   aria-disabled="true">
+                    <span class="nav-icon">▤</span>
+                    <span>Vehicle Master</span>
+                </a>
+
+            </nav>
+
+
+            <div class="sidebar-footer">
+                <span>CHT MANAGEMENT</span>
+                <small>Internal Operations</small>
+            </div>
+
+        </aside>
+
+
+        <!-- =========================
+             MAIN AREA
+             ========================= -->
+
+        <main class="main-area">
+
+            <!-- Top bar -->
+
+            <header class="topbar">
+
+                <button type="button"
+                        class="menu-button"
+                        id="menuButton"
+                        aria-label="Toggle navigation">
+                    ☰
+                </button>
+
+
+                <div class="topbar-right">
+
+                    <div class="user-profile">
+
+                        <div class="user-avatar">
+                            <span id="userInitial">U</span>
+                        </div>
+
+                        <div class="user-info">
+                            <strong id="headerUsername">
+                                User
+                            </strong>
+
+                            <span id="headerRole">
+                                -
+                            </span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </header>
+
+
+            <!-- =========================
+                 PAGE CONTENT
+                 ========================= -->
+
+            <section class="page-content">
+
+                <div class="page-heading">
+
+                    <div>
+                        <div class="breadcrumb">
+                            Masters
+                            <span>/</span>
+                            Location Type Master
+                        </div>
+
+                        <h1>
+                            Location Type Master
+                        </h1>
+
+                        <p>
+                            Manage location types used in the CHT Management System.
+                        </p>
+                    </div>
+
+
+                    <button type="button"
+                            class="primary-button"
+                            id="addLocationTypeButton">
+                        <span class="button-plus">+</span>
+                        Add Location Type
+                    </button>
+
+                </div>
+
+
+                <!-- =========================
+                     CONTENT CARD
+                     ========================= -->
+
+                <section class="content-card">
+
+                    <div class="card-toolbar">
+
+                        <div class="search-box">
+
+                            <span class="search-icon">
+                                ⌕
+                            </span>
+
+                            <input type="search"
+                                   id="searchInput"
+                                   placeholder="Search location type..."
+                                   autocomplete="off">
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Table -->
+
+                    <div class="table-wrapper">
+
+                        <table>
+
+                            <thead>
+                                <tr>
+                                    <th class="serial-column">
+                                        #
+                                    </th>
+
+                                    <th>
+                                        Location Type Code
+                                    </th>
+
+                                    <th>
+                                        Location Type Name
+                                    </th>
+
+                                    <th>
+                                        Status
+                                    </th>
+
+                                    <th class="action-column">
+                                        Action
+                                    </th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="locationTypeTableBody">
+                                <tr>
+                                    <td colspan="5"
+                                        class="table-state">
+                                        Loading location types...
+                                    </td>
+                                </tr>
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+
+                    <!-- Bottom information -->
+
+                    <div class="table-footer">
+
+                        <span id="recordSummary">
+                            Loading...
+                        </span>
+
+                    </div>
+
+                </section>
+
+            </section>
+
+        </main>
+
+    </div>
+
+
+    <!-- =========================
+         ADD / EDIT MODAL
+         ========================= -->
+
+    <div class="modal-backdrop"
+         id="locationTypeModal"
+         hidden>
+
+        <div class="modal"
+             role="dialog"
+             aria-modal="true"
+             aria-labelledby="modalTitle">
+
+            <div class="modal-header">
+
+                <div>
+                    <span class="modal-kicker">
+                        MASTER MANAGEMENT
+                    </span>
+
+                    <h2 id="modalTitle">
+                        Add Location Type
+                    </h2>
+                </div>
+
+                <button type="button"
+                        class="modal-close"
+                        id="closeModalButton"
+                        aria-label="Close">
+                    ×
+                </button>
+
+            </div>
+
+
+            <form id="locationTypeForm"
+                  class="master-form">
+
+                <input type="hidden"
+                       id="locationTypeId">
+
+
+                <div class="form-group">
+
+                    <label for="locationTypeCode">
+                        Location Type Code
+                    </label>
+
+                    <input type="text"
+                           id="locationTypeCode"
+                           maxlength="50"
+                           autocomplete="off"
+                           placeholder="Enter location type code"
+                           required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="locationTypeName">
+                        Location Type Name
+                    </label>
+
+                    <input type="text"
+                           id="locationTypeName"
+                           maxlength="100"
+                           autocomplete="off"
+                           placeholder="Enter location type name"
+                           required>
+
+                </div>
+
+
+                <div class="form-group status-group">
+
+                    <label>
+                        Status
+                    </label>
+
+                    <label class="switch-row">
+
+                        <input type="checkbox"
+                               id="isActive"
+                               checked>
+
+                        <span class="switch"></span>
+
+                        <span id="statusText">
+                            Active
+                        </span>
+
+                    </label>
+
+                </div>
+
+
+                <div class="form-message"
+                     id="formMessage"
+                     role="alert"
+                     aria-live="polite"></div>
+
+
+                <div class="modal-actions">
+
+                    <button type="button"
+                            class="secondary-button"
+                            id="cancelButton">
+                        Cancel
+                    </button>
+
+                    <button type="submit"
+                            class="primary-button"
+                            id="saveButton">
+                        Save Location Type
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <script src="/js/location-type.js"></script>
+
+</body>
+</html>
