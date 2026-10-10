@@ -1,0 +1,253 @@
+/* Indent Log Registration — extends the existing master.css theme. */
+
+.indent-page-heading {
+    margin-bottom: 20px;
+}
+
+.indent-section {
+    margin-bottom: 20px;
+    padding: 24px;
+}
+
+.indent-section-heading {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 22px;
+}
+
+.indent-kicker {
+    display: inline-block;
+    margin-bottom: 7px;
+    color: var(--green-700);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1.1px;
+}
+
+.indent-section-heading h2 {
+    margin: 0 0 7px;
+    color: var(--text-dark);
+    font-size: 21px;
+    font-weight: 700;
+}
+
+.indent-section-heading p {
+    max-width: 760px;
+    color: var(--text-medium);
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.indent-field-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 19px 22px;
+}
+
+.indent-field {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.indent-field-wide {
+    grid-column: 1 / -1;
+}
+
+.indent-field label {
+    color: var(--text-dark);
+    font-size: 13px;
+    font-weight: 650;
+    line-height: 1.45;
+}
+
+.required-mark {
+    color: #a33e35;
+    font-weight: 800;
+}
+
+.indent-field input,
+.indent-field select,
+.indent-field textarea {
+    width: 100%;
+    min-height: 43px;
+    padding: 10px 12px;
+    border: 1px solid var(--border);
+    border-radius: 7px;
+    outline: none;
+    background: #fff;
+    color: var(--text-dark);
+    font: inherit;
+    font-size: 13px;
+    transition: border-color .15s ease, box-shadow .15s ease;
+}
+
+.indent-field textarea {
+    min-height: 76px;
+    line-height: 1.55;
+    resize: vertical;
+}
+
+.indent-field input:focus,
+.indent-field select:focus,
+.indent-field textarea:focus {
+    border-color: var(--green-600);
+    box-shadow: 0 0 0 3px rgba(82, 110, 85, .13);
+}
+
+.indent-form-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin: 8px 0 28px;
+    padding: 18px 20px;
+    border: 1px solid var(--border);
+    border-radius: 9px;
+    background: #fff;
+}
+
+.indent-form-footer p {
+    max-width: 650px;
+    color: var(--text-medium);
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+.indent-form-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.indent-form-actions button:disabled {
+    cursor: wait;
+    opacity: .7;
+}
+
+.page-message {
+    margin: 0 0 18px;
+    padding: 13px 16px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: #fff;
+    color: var(--text-dark);
+    font-size: 13px;
+    line-height: 1.55;
+}
+
+.page-message[hidden] {
+    display: none;
+}
+
+.page-message.success {
+    border-color: #b4d9bc;
+    background: var(--success-bg);
+    color: var(--success-text);
+}
+
+.page-message.error {
+    border-color: #e7c0bd;
+    background: var(--danger-bg);
+    color: var(--danger-text);
+}
+
+.page-message.warning {
+    border-color: #e5d6a7;
+    background: #fff8df;
+    color: #6c5814;
+}
+
+.indent-register-card {
+    margin-bottom: 28px;
+}
+
+.indent-register-heading {
+    align-items: center;
+    padding: 24px 24px 0;
+    margin-bottom: 17px;
+}
+
+.indent-register-card .table-wrapper {
+    overflow-x: auto;
+}
+
+.indent-register-card table {
+    min-width: 850px;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.indent-register-card th,
+.indent-register-card td {
+    padding: 13px 16px;
+    border-bottom: 1px solid var(--border);
+    text-align: left;
+    font-size: 12px;
+    vertical-align: middle;
+}
+
+.indent-register-card th {
+    color: var(--text-medium);
+    background: #f8f8f4;
+    font-size: 11px;
+    font-weight: 750;
+    white-space: nowrap;
+}
+
+.indent-register-card td {
+    color: var(--text-dark);
+}
+
+.indent-register-card .table-footer {
+    padding: 14px 18px;
+}
+
+.status-badge.pending {
+    display: inline-flex;
+    align-items: center;
+    padding: 5px 9px;
+    border-radius: 20px;
+    background: #fff0cf;
+    color: #805c0d;
+    font-size: 11px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+@media (max-width: 760px) {
+    .indent-section {
+        padding: 18px;
+    }
+
+    .indent-field-grid {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 16px;
+    }
+
+    .indent-field-wide {
+        grid-column: auto;
+    }
+
+    .indent-form-footer {
+        align-items: stretch;
+        padding: 16px;
+    }
+
+    .indent-form-actions {
+        width: 100%;
+    }
+
+    .indent-form-actions button {
+        flex: 1;
+    }
+
+    .indent-register-heading {
+        padding: 20px 18px 0;
+        align-items: flex-start;
+    }
+}

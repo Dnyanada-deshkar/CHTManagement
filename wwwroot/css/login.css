@@ -54,7 +54,7 @@ body {
         background-image: url("/assets/login-bg.jpg");
         background-size: cover;
         background-position: center;
-        opacity: 0.78;
+        opacity: 0.95;
         z-index: 0;
     }
 
@@ -64,7 +64,7 @@ body {
 .page-overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient( 180deg, rgba(9, 17, 12, 0.38), rgba(8, 14, 10, 0.72) );
+    background: linear-gradient( 180deg, rgba(9, 17, 12, 0.20), rgba(8, 14, 10, 0.50) );
     backdrop-filter: blur(1px);
     z-index: 1;
 }

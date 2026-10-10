@@ -1,6 +1,7 @@
 ﻿using CHTManagement.Models;
 using Microsoft.EntityFrameworkCore;
 
+
 namespace CHTManagement.Data
 {
     public class ApplicationDbContext : DbContext
@@ -18,6 +19,8 @@ namespace CHTManagement.Data
         public DbSet<Location> Locations { get; set; }
 
         public DbSet<Vehicle> Vehicles { get; set; }
+
+        public DbSet<Indent> Indents { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Indent Log Registration - CHT Management</title>
+    <link rel="stylesheet" href="/css/master.css">
+    <link rel="stylesheet" href="/css/indent-registration.css">
+</head>
+<body>
+    <div class="app-shell">
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <div class="sidebar-emblem"><span></span><span></span><i></i></div>
+                <div class="brand-text">
+                    <strong>LEH 503 ASC BN</strong>
+                    <span>CHT Management System</span>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="/pages/dashboard.html" class="nav-item">
+                    <span class="nav-icon">⌂</span><span>Dashboard</span>
+                </a>
+                <div class="nav-section-title">MASTERS</div>
+                <a href="/pages/location-type-master.html" class="nav-item">
+                    <span class="nav-icon">▦</span><span>Location Type Master</span>
+                </a>
+                <a href="/pages/location-master.html" class="nav-item">
+                    <span class="nav-icon">⌖</span><span>Location Master</span>
+                </a>
+                <a href="/pages/vehicle-master.html" class="nav-item">
+                    <span class="nav-icon">▣</span><span>Vehicle Master</span>
+                </a>
+                <div class="nav-section-title">TRANSPORT</div>
+                <a href="/pages/indent-registration.html" class="nav-item active" aria-current="page">
+                    <span class="nav-icon">▤</span><span>Indent Log Registration</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <span>CHT MANAGEMENT</span>
+                <small>Internal Operations</small>
+            </div>
+        </aside>
+
+        <main class="main-area">
+            <header class="topbar">
+                <button type="button" class="menu-button" id="menuButton" aria-label="Toggle navigation">☰</button>
+                <div class="topbar-right">
+                    <div class="user-profile">
+                        <div class="user-avatar"><span id="userInitial">U</span></div>
+                        <div class="user-info">
+                            <strong id="headerUsername">User</strong>
+                            <span id="headerRole">-</span>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <section class="page-content">
+                <div class="page-heading indent-page-heading">
+                    <div>
+                        <div class="breadcrumb">Transport <span>/</span> Indent Log Registration</div>
+                        <h1>Indent Log Registration Form</h1>
+                        <p>Record the details from the signed Transport Indent and Order Form.</p>
+                    </div>
+                </div>
+
+                <div id="pageMessage" class="page-message" role="status" aria-live="polite" hidden></div>
+
+                <form id="indentForm" novalidate>
+                    <section class="content-card indent-section">
+                        <div class="indent-section-heading">
+                            <div>
+                                <span class="indent-kicker">PART I</span>
+                                <h2>Transport Requirement</h2>
+                                <p>Enter the transport requirement and journey details exactly as recorded on the signed form.</p>
+                            </div>
+                        </div>
+
+                        <div class="indent-field-grid">
+                            <div class="indent-field">
+                                <label for="unitName">1. Unit for which transport is required <span class="required-mark">*</span></label>
+                                <input id="unitName" name="unitName" type="text" maxlength="100" required autocomplete="off">
+                            </div>
+                            <div class="indent-field indent-field-wide">
+                                <label for="userDetails">2. Details of User <span class="required-mark">*</span></label>
+                                <textarea id="userDetails" name="userDetails" rows="2" required></textarea>
+                            </div>
+                            <div class="indent-field">
+                                <label for="indentNumber">3. Indent Number <span class="required-mark">*</span></label>
+                                <input id="indentNumber" name="indentNumber" type="text" maxlength="100" required autocomplete="off">
+                            </div>
+                            <div class="indent-field">
+                                <label for="indentDate">Date of indent <span class="required-mark">*</span></label>
+                                <input id="indentDate" name="indentDate" type="date" required>
+                            </div>
+                            <div class="indent-field">
+                                <label for="requiredDateTime">4. Time and date required <span class="required-mark">*</span></label>
+                                <input id="requiredDateTime" name="requiredDateTime" type="datetime-local" required>
+                            </div>
+                            <div class="indent-field">
+                                <label for="vehicleQuantity">5. Number of vehicles required <span class="required-mark">*</span></label>
+                                <input id="vehicleQuantity" name="vehicleQuantity" type="number" min="1" step="1" value="1" required>
+                            </div>
+                            <div class="indent-field">
+                                <label for="vehicleId">Vehicle type <span class="required-mark">*</span></label>
+                                <select id="vehicleId" name="vehicleId" required>
+                                    <option value="">Loading vehicle types...</option>
+                                </select>
+                            </div>
+                            <div class="indent-field">
+                                <label for="whereRequiredLocationId">6. Where required <span class="required-mark">*</span></label>
+                                <select id="whereRequiredLocationId" name="whereRequiredLocationId" required>
+                                    <option value="">Loading locations...</option>
+                                </select>
+                            </div>
+                            <div class="indent-field">
+                                <label for="durationOfEmployment">7. Duration of employment (hours/days) <span class="required-mark">*</span></label>
+                                <input id="durationOfEmployment" name="durationOfEmployment" type="text" required placeholder="e.g. 6 hours / 2 days">
+                            </div>
+                            <div class="indent-field">
+                                <label for="destination">8. Destination</label>
+                                <input id="destination" name="destination" type="text" maxlength="250">
+                            </div>
+                            <div class="indent-field">
+                                <label for="oneWayDistance">One-way distance</label>
+                                <input id="oneWayDistance" name="oneWayDistance" type="number" min="0" step="0.01" placeholder="Distance as per form">
+                            </div>
+                            <div class="indent-field">
+                                <label for="viaRoute">Via route</label>
+                                <input id="viaRoute" name="viaRoute" type="text" maxlength="500">
+                            </div>
+                            <div class="indent-field indent-field-wide">
+                                <label for="exactNatureOfDutyWithAuthority">9. Exact nature of duty with authority <span class="required-mark">*</span></label>
+                                <textarea id="exactNatureOfDutyWithAuthority" name="exactNatureOfDutyWithAuthority" rows="3" required></textarea>
+                            </div>
+                            <div class="indent-field indent-field-wide">
+                                <label for="reasonRegimentalStandingDutyTransportNotUtilized">10. Reasons why regimental standing duty transport is not utilized</label>
+                                <textarea id="reasonRegimentalStandingDutyTransportNotUtilized" name="reasonRegimentalStandingDutyTransportNotUtilized" rows="2"></textarea>
+                            </div>
+                            <div class="indent-field indent-field-wide">
+                                <label for="reasonForUsingCHTOnSundayHoliday">11. Reasons for using CHT on Sunday/Holiday</label>
+                                <textarea id="reasonForUsingCHTOnSundayHoliday" name="reasonForUsingCHTOnSundayHoliday" rows="2"></textarea>
+                            </div>
+                            <div class="indent-field indent-field-wide">
+                                <label for="reasonForUsingCHTToRailConnectedDestination">12. Reasons for using CHT to a destination connected by rail</label>
+                                <textarea id="reasonForUsingCHTToRailConnectedDestination" name="reasonForUsingCHTToRailConnectedDestination" rows="2"></textarea>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="content-card indent-section">
+                        <div class="indent-section-heading">
+                            <div>
+                                <span class="indent-kicker">PART I · CERTIFICATION</span>
+                                <h2>Indenting and Certifying Officer</h2>
+                                <p>Enter the station and date written on the signed source document. The paper signature remains on the source document.</p>
+                            </div>
+                        </div>
+                        <div class="indent-field-grid">
+                            <div class="indent-field">
+                                <label for="indentingOfficerStation">Indenting officer — Station</label>
+                                <input id="indentingOfficerStation" name="indentingOfficerStation" type="text" maxlength="100">
+                            </div>
+                            <div class="indent-field">
+                                <label for="indentingOfficerDate">Indenting officer — Date</label>
+                                <input id="indentingOfficerDate" name="indentingOfficerDate" type="date">
+                            </div>
+                            <div class="indent-field">
+                                <label for="certifyingOfficerStation">OC/CO/Head of Branch — Station</label>
+                                <input id="certifyingOfficerStation" name="certifyingOfficerStation" type="text" maxlength="100">
+                            </div>
+                            <div class="indent-field">
+                                <label for="certifyingOfficerDate">OC/CO/Head of Branch — Date</label>
+                                <input id="certifyingOfficerDate" name="certifyingOfficerDate" type="date">
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="content-card indent-section">
+                        <div class="indent-section-heading">
+                            <div>
+                                <span class="indent-kicker">PART II</span>
+                                <h2>STO's Transport Order</h2>
+                                <p>Record Part II values if they are available on the source form at registration time.</p>
+                            </div>
+                        </div>
+                        <div class="indent-field-grid">
+                            <div class="indent-field">
+                                <label for="hiringTransportRegisterSerialNumber">Serial number of register for hiring transport</label>
+                                <input id="hiringTransportRegisterSerialNumber" name="hiringTransportRegisterSerialNumber" type="text" maxlength="100">
+                            </div>
+                            <div class="indent-field">
+                                <label for="budgetHead">Debitable to budget head</label>
+                                <input id="budgetHead" name="budgetHead" type="text" maxlength="100" value="105F/1/255/01 &amp; 02">
+                            </div>
+                            <div class="indent-field">
+                                <label for="transportSupplyDateTime">Time/date transport supplied</label>
+                                <input id="transportSupplyDateTime" name="transportSupplyDateTime" type="datetime-local">
+                            </div>
+                            <div class="indent-field">
+                                <label for="durationOfDutyDaysHours">Duration of duty (days/hours)</label>
+                                <input id="durationOfDutyDaysHours" name="durationOfDutyDaysHours" type="text" maxlength="100">
+                            </div>
+                            <div class="indent-field indent-field-wide">
+                                <label for="detailsOfJourney">Details of journey</label>
+                                <textarea id="detailsOfJourney" name="detailsOfJourney" rows="2"></textarea>
+                            </div>
+                            <div class="indent-field">
+                                <label for="orderStation">Order — Station</label>
+                                <input id="orderStation" name="orderStation" type="text" maxlength="100">
+                            </div>
+                            <div class="indent-field">
+                                <label for="orderDate">Order — Date</label>
+                                <input id="orderDate" name="orderDate" type="date">
+                            </div>
+                            <div class="indent-field indent-field-wide">
+                                <label for="issuingOfficerRankNameDesignation">Issuing officer — Rank, name and designation</label>
+                                <input id="issuingOfficerRankNameDesignation" name="issuingOfficerRankNameDesignation" type="text" maxlength="200">
+                            </div>
+                        </div>
+                    </section>
+
+                    <div class="indent-form-footer">
+                        <p><span class="required-mark">*</span> Required to register a completed indent. A successful registration will be placed in the Clerk queue.</p>
+                        <div class="indent-form-actions">
+                            <button type="reset" class="secondary-button" id="resetFormButton">Reset form</button>
+                            <button type="submit" class="primary-button" id="saveIndentButton">Register Indent Log</button>
+                        </div>
+                    </div>
+                </form>
+
+                <section class="content-card indent-register-card">
+                    <div class="indent-section-heading indent-register-heading">
+                        <div>
+                            <span class="indent-kicker">LOG REGISTER</span>
+                            <h2>Submitted Indent Logs</h2>
+                            <p>New records are shown with their current workflow status.</p>
+                        </div>
+                        <button type="button" class="secondary-button" id="refreshIndentsButton">Refresh list</button>
+                    </div>
+                    <div class="table-wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Log Ref.</th>
+                                    <th>Indent Number</th>
+                                    <th>Unit</th>
+                                    <th>Required Date/Time</th>
+                                    <th>Vehicle Type</th>
+                                    <th>Location</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="indentTableBody">
+                                <tr><td colspan="7" class="table-state">Loading indent logs...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="table-footer"><span id="indentRecordSummary">Loading...</span></div>
+                </section>
+            </section>
+        </main>
+    </div>
+
+    <script src="/js/indent-registration.js"></script>
+</body>
+</html>

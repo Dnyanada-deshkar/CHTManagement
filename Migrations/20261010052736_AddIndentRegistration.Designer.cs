@@ -4,6 +4,7 @@ using CHTManagement.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CHTManagement.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20261010052736_AddIndentRegistration")]
+    partial class AddIndentRegistration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -84,19 +87,22 @@ namespace CHTManagement.Migrations
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("DurationOfEmployment")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ExactNatureOfDutyWithAuthority")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("HiringTransportRegisterSerialNumber")
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<DateTime?>("IndentDate")
+                    b.Property<DateTime>("IndentDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("IndentNumber")
+                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
@@ -130,7 +136,7 @@ namespace CHTManagement.Migrations
                     b.Property<string>("ReasonRegimentalStandingDutyTransportNotUtilized")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("RequiredDateTime")
+                    b.Property<DateTime>("RequiredDateTime")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Status")
@@ -142,23 +148,25 @@ namespace CHTManagement.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("UnitName")
+                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("UserDetails")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("VehicleId")
+                    b.Property<int>("VehicleId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("VehicleQuantity")
+                    b.Property<int>("VehicleQuantity")
                         .HasColumnType("int");
 
                     b.Property<string>("ViaRoute")
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
 
-                    b.Property<int?>("WhereRequiredLocationId")
+                    b.Property<int>("WhereRequiredLocationId")
                         .HasColumnType("int");
 
                     b.HasKey("IndentId");
@@ -263,11 +271,15 @@ namespace CHTManagement.Migrations
                 {
                     b.HasOne("CHTManagement.Models.Vehicle", "Vehicle")
                         .WithMany()
-                        .HasForeignKey("VehicleId");
+                        .HasForeignKey("VehicleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("CHTManagement.Models.Location", "WhereRequiredLocation")
                         .WithMany()
-                        .HasForeignKey("WhereRequiredLocationId");
+                        .HasForeignKey("WhereRequiredLocationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Vehicle");
 
