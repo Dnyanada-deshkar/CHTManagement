@@ -94,6 +94,53 @@
         <span class="master-arrow">→</span>
     </a>
 
+    <a href="/pages/clerk-approval.html"
+       class="dashboard-master-button"
+       id="clerkApprovalDashboardLink"
+       hidden>
+        <span class="master-button-icon">✓</span>
+        <span class="master-button-content">
+            <strong>Clerk Approval</strong>
+            <small>Review pending indent logs</small>
+        </span>
+        <span class="master-arrow">→</span>
+    </a>
+
+    <a href="/pages/cio-approval.html"
+       class="dashboard-master-button"
+       id="cioApprovalDashboardLink"
+       hidden>
+        <span class="master-button-icon">✓</span>
+        <span class="master-button-content">
+            <strong>CIO Approval</strong>
+            <small>Review Clerk-forwarded indent logs</small>
+        </span>
+        <span class="master-arrow">→</span>
+    </a>
+
+    <a href="/pages/rate-master.html" class="dashboard-master-button">
+        <span class="master-button-icon">₹</span>
+        <span class="master-button-content"><strong>Rate Master</strong><small>Manage contract rates for vehicle categories</small></span>
+        <span class="master-arrow">→</span>
+    </a>
+
+    <a href="/pages/vendor-master.html" class="dashboard-master-button">
+        <span class="master-button-icon">▤</span>
+        <span class="master-button-content"><strong>Vendor Master</strong><small>Manage vendors for future assignments</small></span>
+        <span class="master-arrow">→</span>
+    </a>
+
+
+    <a href="/pages/vendor-assignment.html" class="dashboard-master-button">
+        <span class="master-button-icon">⇄</span>
+        <span class="master-button-content">
+            <strong>Vendor Assignment</strong>
+            <small>Assign active vendors to CIO-approved indent logs</small>
+        </span>
+        <span class="master-arrow">→</span>
+    </a>
+
+
 
 
     <button id="logoutBtn">Logout</button>
@@ -120,6 +167,24 @@
 
                 window.location.href = "/pages/login.html";
             });
+
+
+        (() => {
+            const link = document.getElementById("clerkApprovalDashboardLink");
+            if (link && sessionStorage.getItem("role") === "CHT-Clerk") {
+                link.hidden = false;
+            }
+        })();
+
+
+
+        (() => {
+            const link = document.getElementById("cioApprovalDashboardLink");
+            if (link && sessionStorage.getItem("role") === "CHT-CIO") {
+                link.hidden = false;
+            }
+        })();
+
 
     </script>
 

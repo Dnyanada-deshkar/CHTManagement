@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#17231a">
+    <title>Vendor Master - CHT Management</title>
+    <link rel="stylesheet" href="/css/master.css">
+    <link rel="stylesheet" href="/css/rate-vendor-master.css">
+</head>
+<body>
+<div class="app-shell">
+
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <div class="sidebar-emblem" aria-hidden="true"><span></span><span></span><i></i></div>
+                <div class="brand-text"><strong>LEH 503 ASC BN</strong><span>CHT Management System</span></div>
+            </div>
+            <nav class="sidebar-nav" aria-label="Main navigation">
+                <a href="/pages/dashboard.html" class="nav-item"><span class="nav-icon">⌂</span><span>Dashboard</span></a>
+                <div class="nav-section-title">MASTERS</div>
+                <a href="/pages/location-type-master.html" class="nav-item"><span class="nav-icon">▦</span><span>Location Type Master</span></a>
+                <a href="/pages/location-master.html" class="nav-item"><span class="nav-icon">⌖</span><span>Location Master</span></a>
+                <a href="/pages/vehicle-master.html" class="nav-item"><span class="nav-icon">▣</span><span>Vehicle Master</span></a>
+                <a href="/pages/rate-master.html" class="nav-item "><span class="nav-icon">₹</span><span>Rate Master</span></a>
+                <a href="/pages/vendor-master.html" class="nav-item active"><span class="nav-icon">▤</span><span>Vendor Master</span></a>
+                <div class="nav-section-title">TRANSPORT WORKFLOW</div>
+                <a href="/pages/indent-registration.html" class="nav-item"><span class="nav-icon">▤</span><span>Indent Log Registration</span></a>
+                <a href="/pages/clerk-approval.html" class="nav-item"><span class="nav-icon">✓</span><span>Clerk Approval</span></a>
+                <a href="/pages/cio-approval.html" class="nav-item"><span class="nav-icon">✓</span><span>CIO Approval</span></a>
+            </nav>
+            <div class="sidebar-footer"><span>CHT MANAGEMENT</span><small>Internal Operations</small></div>
+        </aside>
+    <main class="main-area">
+        <header class="topbar">
+            <button type="button" class="menu-button" id="menuButton" aria-label="Toggle navigation">☰</button>
+            <div class="topbar-right">
+                <div class="user-profile">
+                    <div class="user-avatar"><span id="userInitial">U</span></div>
+                    <div class="user-info"><strong id="headerUsername">User</strong><span id="headerRole">-</span></div>
+                </div>
+                <button type="button" id="logoutButton" class="logout-button">Logout</button>
+            </div>
+        </header>
+        <section class="page-content">
+            <div class="page-heading">
+                <div>
+                    <div class="breadcrumb">Masters <span>/</span> Vendor Master</div>
+                    <h1>Vendor Master</h1>
+                    <p>Maintain the vendor list used later during Vendor Assignment.</p>
+                </div>
+                <button type="button" class="primary-button" id="addButton"><span class="button-plus">+</span> Add Vendor</button>
+            </div>
+            <div class="rv-message" id="pageMessage" role="status" aria-live="polite"></div>
+            <section class="content-card">
+                <div class="card-toolbar">
+                    <div class="search-box"><span class="search-icon">⌕</span><input type="search" id="searchInput" placeholder="Search vendor master..." autocomplete="off"></div>
+                    <select id="statusFilter" aria-label="Filter by status"><option value="">All statuses</option><option value="active">Active</option><option value="inactive">Inactive</option></select>
+                </div>
+                <div class="table-wrapper">
+                    <table class="rv-table">
+                        <thead><tr><th>#</th><th>Vendor Code</th><th>Vendor Name</th><th>Contact Person</th><th>Contact Number</th><th>Email</th><th>Status</th><th class="action-column">Action</th></tr></thead>
+                        <tbody id="tableBody"><tr><td colspan="10" class="table-state">Loading records...</td></tr></tbody>
+                    </table>
+                </div>
+                <div class="table-footer"><span id="recordSummary">Loading...</span></div>
+            </section>
+        </section>
+    </main>
+</div>
+
+<div class="modal-backdrop" id="editModal" hidden>
+  <div class="modal rv-modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-header"><div><span class="modal-kicker">MASTER MANAGEMENT</span><h2 id="modalTitle">Add Vendor</h2></div><button type="button" class="modal-close" id="closeModalButton" aria-label="Close">×</button></div>
+    <form id="editForm" class="master-form">
+      <input type="hidden" id="vendorId">
+      <div class="rv-form-grid">
+        <div class="form-group"><label for="vendorCode">Vendor Code *</label><input id="vendorCode" maxlength="50" autocomplete="off" required></div>
+        <div class="form-group"><label for="vendorName">Vendor Name *</label><input id="vendorName" maxlength="150" autocomplete="organization" required></div>
+        <div class="form-group"><label for="contactPerson">Contact Person (optional)</label><input id="contactPerson" maxlength="150" autocomplete="name"></div>
+        <div class="form-group"><label for="contactNumber">Contact Number (optional)</label><input id="contactNumber" maxlength="30" autocomplete="tel"></div>
+        <div class="form-group rv-full-width"><label for="email">Email (optional)</label><input id="email" type="email" maxlength="254" autocomplete="email"></div>
+        <div class="form-group rv-full-width"><label for="address">Address (optional)</label><textarea id="address" maxlength="500" rows="3"></textarea></div>
+        <div class="form-group status-group"><label>Status</label><label class="switch-row"><input type="checkbox" id="isActive" checked><span class="switch"></span><span id="statusText">Active</span></label></div>
+      </div>
+      <p class="rv-form-help">The client PDF names Vendor Master but does not specify vendor fields. Vendor Code and Vendor Name are required; contact details are optional application fields to support later assignment.</p>
+      <div class="form-message" id="formMessage" role="alert" aria-live="polite"></div>
+      <div class="modal-actions"><button type="button" class="secondary-button" id="cancelButton">Cancel</button><button type="submit" class="primary-button" id="saveButton">Save Vendor</button></div>
+    </form>
+  </div>
+</div>
+
+<script src="/js/vendor-master.js"></script>
+</body>
+</html>

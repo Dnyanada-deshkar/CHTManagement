@@ -50,6 +50,52 @@ namespace CHTManagement.Migrations
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("CHTManagement.Models.ContractRate", b =>
+                {
+                    b.Property<int>("RateId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RateId"));
+
+                    b.Property<string>("ContractYear")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("ItemTitle")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<decimal>("RateAmount")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("SerialNo")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UnitOfMeasure")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<string>("VehicleCategory")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.HasKey("RateId");
+
+                    b.HasIndex("ContractYear", "VehicleCategory", "SerialNo")
+                        .IsUnique();
+
+                    b.ToTable("ContractRates");
+                });
+
             modelBuilder.Entity("CHTManagement.Models.Indent", b =>
                 {
                     b.Property<int>("IndentId")
@@ -259,6 +305,81 @@ namespace CHTManagement.Migrations
                     b.ToTable("Vehicles");
                 });
 
+            modelBuilder.Entity("CHTManagement.Models.Vendor", b =>
+                {
+                    b.Property<int>("VendorId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("VendorId"));
+
+                    b.Property<string>("Address")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<string>("ContactNumber")
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
+
+                    b.Property<string>("ContactPerson")
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
+
+                    b.Property<string>("Email")
+                        .HasMaxLength(254)
+                        .HasColumnType("nvarchar(254)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("VendorCode")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("VendorName")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
+
+                    b.HasKey("VendorId");
+
+                    b.HasIndex("VendorCode")
+                        .IsUnique();
+
+                    b.ToTable("Vendors");
+                });
+
+            modelBuilder.Entity("CHTManagement.Models.VendorAssignment", b =>
+                {
+                    b.Property<int>("VendorAssignmentId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("VendorAssignmentId"));
+
+                    b.Property<DateTime>("AssignedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("AssignedBy")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<int>("IndentId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("VendorId")
+                        .HasColumnType("int");
+
+                    b.HasKey("VendorAssignmentId");
+
+                    b.HasIndex("IndentId");
+
+                    b.HasIndex("VendorId");
+
+                    b.ToTable("VendorAssignments");
+                });
+
             modelBuilder.Entity("CHTManagement.Models.Indent", b =>
                 {
                     b.HasOne("CHTManagement.Models.Vehicle", "Vehicle")
@@ -281,6 +402,25 @@ namespace CHTManagement.Migrations
                         .HasForeignKey("LocationTypeId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("CHTManagement.Models.VendorAssignment", b =>
+                {
+                    b.HasOne("CHTManagement.Models.Indent", "Indent")
+                        .WithMany()
+                        .HasForeignKey("IndentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("CHTManagement.Models.Vendor", "Vendor")
+                        .WithMany()
+                        .HasForeignKey("VendorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Indent");
+
+                    b.Navigation("Vendor");
                 });
 #pragma warning restore 612, 618
         }

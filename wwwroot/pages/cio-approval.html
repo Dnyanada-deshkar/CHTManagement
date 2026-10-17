@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#17231a">
+    <title>CIO Approval - CHT Management</title>
+    <link rel="stylesheet" href="/css/cio-approval.css">
+</head>
+<body>
+    <div class="app-shell">
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <div class="sidebar-emblem" aria-hidden="true"><span></span><span></span><i></i></div>
+                <div class="brand-text">
+                    <strong>LEH 503 ASC BN</strong>
+                    <span>CHT Management System</span>
+                </div>
+            </div>
+            <nav class="sidebar-nav" aria-label="Main navigation">
+                <a href="/pages/dashboard.html" class="nav-item"><span class="nav-icon">⌂</span><span>Dashboard</span></a>
+                <div class="nav-section-title">MASTERS</div>
+                <a href="/pages/location-type-master.html" class="nav-item"><span class="nav-icon">▦</span><span>Location Type Master</span></a>
+                <a href="/pages/location-master.html" class="nav-item"><span class="nav-icon">⌖</span><span>Location Master</span></a>
+                <a href="/pages/vehicle-master.html" class="nav-item"><span class="nav-icon">▣</span><span>Vehicle Master</span></a>
+                <div class="nav-section-title">TRANSPORT WORKFLOW</div>
+                <a href="/pages/indent-registration.html" class="nav-item"><span class="nav-icon">▤</span><span>Indent Log Registration</span></a>
+                <a href="/pages/cio-approval.html" class="nav-item active" aria-current="page"><span class="nav-icon">✓</span><span>CIO Approval</span></a>
+            </nav>
+            <div class="sidebar-footer"><span>CHT MANAGEMENT</span><small>Internal Operations</small></div>
+        </aside>
+
+        <main class="main-area">
+            <header class="topbar">
+                <button type="button" class="menu-button" id="menuButton" aria-label="Toggle navigation">☰</button>
+                <div class="topbar-right">
+                    <div class="user-profile">
+                        <div class="user-avatar"><span id="userInitial">C</span></div>
+                        <div class="user-info"><strong id="headerUsername">CHT-CIO</strong><span id="headerRole">CHT-CIO</span></div>
+                    </div>
+                    <button type="button" id="logoutButton" class="logout-button">Logout</button>
+                </div>
+            </header>
+
+            <section class="page-content">
+                <div class="page-heading">
+                    <div>
+                        <div class="breadcrumb">Transport Workflow <span>/</span> CIO Approval</div>
+                        <h1>Indent Log — CHT-CIO Approval</h1>
+                        <p>Review logs forwarded by CHT-Clerk before approving them for Vendor Assignment.</p>
+                    </div>
+                    <button type="button" class="primary-button" id="refreshButton"><span aria-hidden="true">↻</span> Refresh list</button>
+                </div>
+
+                <section class="notice-card" aria-label="Workflow information">
+                    <span class="notice-icon" aria-hidden="true">i</span>
+                    <p>Only records with status <strong>Pending with CIO</strong> appear here. When approved, a log moves to <strong>Approved by CIO</strong> and is ready for the next Vendor Assignment stage.</p>
+                </section>
+
+                <section class="content-card">
+                    <div class="card-toolbar">
+                        <div>
+                            <h2>Pending CIO approval</h2>
+                            <p class="subheading">Review the transport requirement and STO order details before approval.</p>
+                        </div>
+                        <label class="search-box" for="searchInput">
+                            <span class="search-icon" aria-hidden="true">⌕</span>
+                            <input type="search" id="searchInput" placeholder="Search reference, unit, vehicle…" autocomplete="off">
+                        </label>
+                    </div>
+                    <div id="pageMessage" class="page-message" role="status" aria-live="polite" hidden></div>
+                    <div class="table-wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th class="serial-column">#</th>
+                                    <th>Indent reference</th>
+                                    <th>Indent date</th>
+                                    <th>Unit</th>
+                                    <th>Required date &amp; time</th>
+                                    <th>Vehicle</th>
+                                    <th>Location</th>
+                                    <th>Status</th>
+                                    <th class="action-column">Review</th>
+                                </tr>
+                            </thead>
+                            <tbody id="pendingTableBody">
+                                <tr><td colspan="9" class="table-state">Loading pending CIO approvals…</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="table-footer"><span id="recordSummary">Loading…</span></div>
+                </section>
+            </section>
+        </main>
+    </div>
+
+    <div class="modal-backdrop" id="reviewModal" hidden>
+        <section class="review-modal" role="dialog" aria-modal="true" aria-labelledby="reviewModalTitle">
+            <header class="modal-header">
+                <div>
+                    <span class="modal-kicker">CHT-CIO REVIEW</span>
+                    <h2 id="reviewModalTitle">Review indent log</h2>
+                    <p id="reviewReference" class="modal-reference"></p>
+                </div>
+                <button type="button" class="modal-close" id="closeModalButton" aria-label="Close review">×</button>
+            </header>
+            <div id="reviewDetails" class="review-details"></div>
+            <div id="modalMessage" class="modal-message" role="alert" aria-live="polite" hidden></div>
+            <footer class="modal-actions">
+                <button type="button" class="secondary-button" id="cancelReviewButton">Back to list</button>
+                <button type="button" class="primary-button" id="approveButton">Approve for Vendor Assignment</button>
+            </footer>
+        </section>
+    </div>
+
+    <script src="/js/cio-approval.js"></script>
+</body>
+</html>

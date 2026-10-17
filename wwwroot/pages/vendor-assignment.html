@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vendor Assignment - CHT Management</title>
+    <link rel="stylesheet" href="/css/master.css">
+    <link rel="stylesheet" href="/css/vendor-assignment.css">
+</head>
+<body>
+<div class="app-shell">
+    <aside class="sidebar">
+        <div class="sidebar-brand">
+            <div class="sidebar-emblem"><span></span><span></span><i></i></div>
+            <div class="brand-text"><strong>LEH 503 ASC BN</strong><span>CHT Management System</span></div>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="/pages/dashboard.html" class="nav-item"><span class="nav-icon">⌂</span><span>Dashboard</span></a>
+            <div class="nav-section-title">MASTERS</div>
+            <a href="/pages/location-type-master.html" class="nav-item"><span class="nav-icon">▦</span><span>Location Type Master</span></a>
+            <a href="/pages/location-master.html" class="nav-item"><span class="nav-icon">⌖</span><span>Location Master</span></a>
+            <a href="/pages/vehicle-master.html" class="nav-item"><span class="nav-icon">▣</span><span>Vehicle Master</span></a>
+            <a href="/pages/rate-master.html" class="nav-item"><span class="nav-icon">₹</span><span>Rate Master</span></a>
+            <a href="/pages/vendor-master.html" class="nav-item"><span class="nav-icon">▤</span><span>Vendor Master</span></a>
+            <div class="nav-section-title">WORKFLOW</div>
+            <a href="/pages/indent-registration.html" class="nav-item"><span class="nav-icon">＋</span><span>Indent Registration</span></a>
+            <a href="/pages/clerk-approval.html" class="nav-item"><span class="nav-icon">✓</span><span>Clerk Approval</span></a>
+            <a href="/pages/cio-approval.html" class="nav-item"><span class="nav-icon">✓</span><span>CIO Approval</span></a>
+            <a href="/pages/vendor-assignment.html" class="nav-item active"><span class="nav-icon">⇄</span><span>Vendor Assignment</span></a>
+        </nav>
+        <div class="sidebar-footer"><span>CHT MANAGEMENT</span><small>Internal Operations</small></div>
+    </aside>
+
+    <main class="main-area">
+        <header class="topbar">
+            <button type="button" class="menu-button" id="menuButton" aria-label="Toggle navigation">☰</button>
+            <div class="topbar-right">
+                <div class="user-profile">
+                    <div class="user-avatar"><span id="userInitial">U</span></div>
+                    <div class="user-info"><strong id="headerUsername">User</strong><span id="headerRole">-</span></div>
+                </div>
+            </div>
+        </header>
+
+        <section class="page-content">
+            <div class="page-heading va-page-heading">
+                <div>
+                    <div class="breadcrumb">Workflow <span>/</span> Vendor Assignment</div>
+                    <h1>Vendor Assignment</h1>
+                    <p>Assign an active vendor to each indent log approved by CHT-CIO.</p>
+                </div>
+                <button type="button" class="primary-button" id="refreshButton"><span class="button-plus">↻</span> Refresh list</button>
+            </div>
+
+            <div class="va-notice" role="note">
+                Only logs with status <strong>Approved by CIO</strong> can be assigned. A successful assignment changes the status to <strong>Assigned to Vendor</strong> and records the selected vendor.
+            </div>
+
+            <div id="pageMessage" class="va-message" role="status" aria-live="polite" hidden></div>
+
+            <section class="content-card">
+                <div class="va-card-header">
+                    <div>
+                        <span class="va-kicker">LOG REGISTER</span>
+                        <h2>Indent Log References</h2>
+                        <p>Review the reference and select the appropriate vendor for each eligible log.</p>
+                    </div>
+                    <div class="va-counts">
+                        <div class="va-count"><strong id="pendingCount">—</strong><span>Awaiting assignment</span></div>
+                        <div class="va-count"><strong id="assignedCount">—</strong><span>Assigned</span></div>
+                    </div>
+                </div>
+
+                <div class="card-toolbar va-toolbar">
+                    <div class="search-box">
+                        <span class="search-icon">⌕</span>
+                        <input type="search" id="searchInput" placeholder="Search log ref, indent number, unit..." autocomplete="off">
+                    </div>
+                    <label class="va-filter-label" for="statusFilter">Show
+                        <select id="statusFilter">
+                            <option value="all">All relevant logs</option>
+                            <option value="pending">Awaiting assignment</option>
+                            <option value="assigned">Already assigned</option>
+                        </select>
+                    </label>
+                </div>
+
+                <div class="table-wrapper">
+                    <table class="va-table">
+                        <thead>
+                            <tr>
+                                <th>LOG REF.</th>
+                                <th>INDENT NUMBER</th>
+                                <th>UNIT</th>
+                                <th>REQUIRED DATE/TIME</th>
+                                <th>VEHICLE TYPE / QTY</th>
+                                <th>LOCATION</th>
+                                <th>DESTINATION</th>
+                                <th>VENDOR</th>
+                                <th>STATUS</th>
+                                <th>ACTION</th>
+                            </tr>
+                        </thead>
+                        <tbody id="assignmentTableBody">
+                            <tr><td colspan="10" class="table-state">Loading indent logs...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="table-footer va-table-footer">
+                    <span id="recordSummary">Loading...</span>
+                    <span id="vendorSummary" class="va-muted"></span>
+                </div>
+            </section>
+
+            <p class="va-footer-note">After assignment, the next workflow stage is Vehicle Demand Confirmation. Driver details and vehicle photo belong to that next stage, not to this assignment form.</p>
+        </section>
+    </main>
+</div>
+<script src="/js/vendor-assignment.js"></script>
+</body>
+</html>

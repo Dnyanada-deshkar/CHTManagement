@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#17231a">
+    <title>Rate Master - CHT Management</title>
+    <link rel="stylesheet" href="/css/master.css">
+    <link rel="stylesheet" href="/css/rate-vendor-master.css">
+</head>
+<body>
+<div class="app-shell">
+
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <div class="sidebar-emblem" aria-hidden="true"><span></span><span></span><i></i></div>
+                <div class="brand-text"><strong>LEH 503 ASC BN</strong><span>CHT Management System</span></div>
+            </div>
+            <nav class="sidebar-nav" aria-label="Main navigation">
+                <a href="/pages/dashboard.html" class="nav-item"><span class="nav-icon">⌂</span><span>Dashboard</span></a>
+                <div class="nav-section-title">MASTERS</div>
+                <a href="/pages/location-type-master.html" class="nav-item"><span class="nav-icon">▦</span><span>Location Type Master</span></a>
+                <a href="/pages/location-master.html" class="nav-item"><span class="nav-icon">⌖</span><span>Location Master</span></a>
+                <a href="/pages/vehicle-master.html" class="nav-item"><span class="nav-icon">▣</span><span>Vehicle Master</span></a>
+                <a href="/pages/rate-master.html" class="nav-item active"><span class="nav-icon">₹</span><span>Rate Master</span></a>
+                <a href="/pages/vendor-master.html" class="nav-item "><span class="nav-icon">▤</span><span>Vendor Master</span></a>
+                <div class="nav-section-title">TRANSPORT WORKFLOW</div>
+                <a href="/pages/indent-registration.html" class="nav-item"><span class="nav-icon">▤</span><span>Indent Log Registration</span></a>
+                <a href="/pages/clerk-approval.html" class="nav-item"><span class="nav-icon">✓</span><span>Clerk Approval</span></a>
+                <a href="/pages/cio-approval.html" class="nav-item"><span class="nav-icon">✓</span><span>CIO Approval</span></a>
+            </nav>
+            <div class="sidebar-footer"><span>CHT MANAGEMENT</span><small>Internal Operations</small></div>
+        </aside>
+    <main class="main-area">
+        <header class="topbar">
+            <button type="button" class="menu-button" id="menuButton" aria-label="Toggle navigation">☰</button>
+            <div class="topbar-right">
+                <div class="user-profile">
+                    <div class="user-avatar"><span id="userInitial">U</span></div>
+                    <div class="user-info"><strong id="headerUsername">User</strong><span id="headerRole">-</span></div>
+                </div>
+                <button type="button" id="logoutButton" class="logout-button">Logout</button>
+            </div>
+        </header>
+        <section class="page-content">
+            <div class="page-heading">
+                <div>
+                    <div class="breadcrumb">Masters <span>/</span> Rate Master</div>
+                    <h1>Rate Master</h1>
+                    <p>Maintain vehicle-category contract rates by item and unit of measure. Contract rates shown in the client PDF are for 2026–27.</p>
+                </div>
+                <button type="button" class="primary-button" id="addButton"><span class="button-plus">+</span> Add Contract Rate</button>
+            </div>
+            <div class="rv-message" id="pageMessage" role="status" aria-live="polite"></div>
+            <section class="content-card">
+                <div class="card-toolbar">
+                    <div class="search-box"><span class="search-icon">⌕</span><input type="search" id="searchInput" placeholder="Search rate master..." autocomplete="off"></div>
+                    <select id="categoryFilter" aria-label="Filter by vehicle category"><option value="">All vehicle categories</option></select>
+                </div>
+                <div class="table-wrapper">
+                    <table class="rv-table">
+                        <thead><tr><th>#</th><th>Contract Year</th><th>Vehicle Category</th><th>Ser</th><th>Item Title</th><th>A/U</th><th class="rate-number">Rate</th><th>Status</th><th class="action-column">Action</th></tr></thead>
+                        <tbody id="tableBody"><tr><td colspan="10" class="table-state">Loading records...</td></tr></tbody>
+                    </table>
+                </div>
+                <div class="table-footer"><span id="recordSummary">Loading...</span></div>
+            </section>
+        </section>
+    </main>
+</div>
+
+<div class="modal-backdrop" id="editModal" hidden>
+  <div class="modal rv-modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-header"><div><span class="modal-kicker">MASTER MANAGEMENT</span><h2 id="modalTitle">Add Contract Rate</h2></div><button type="button" class="modal-close" id="closeModalButton" aria-label="Close">×</button></div>
+    <form id="editForm" class="master-form">
+      <input type="hidden" id="rateId">
+      <div class="rv-form-grid">
+        <div class="form-group"><label for="contractYear">Contract Year</label><input id="contractYear" maxlength="20" value="2026-27" required></div>
+        <div class="form-group"><label for="vehicleCategory">Vehicle Category</label><select id="vehicleCategory" required></select></div>
+        <div class="form-group"><label for="serialNo">Serial No.</label><input id="serialNo" type="number" min="1" step="1" required></div>
+        <div class="form-group"><label for="itemTitle">Item Title</label><input id="itemTitle" maxlength="100" required></div>
+        <div class="form-group"><label for="unitOfMeasure">A/U (Unit of Measure)</label><input id="unitOfMeasure" maxlength="20" placeholder="e.g. KMs, Nos, Hrs" required></div>
+        <div class="form-group"><label for="rateAmount">Rate</label><input id="rateAmount" type="number" min="0" step="0.01" required></div>
+        <div class="form-group status-group"><label>Status</label><label class="switch-row"><input type="checkbox" id="isActive" checked><span class="switch"></span><span id="statusText">Active</span></label></div>
+      </div>
+      <p class="rv-form-help">Values should match the approved contract schedule. Rate is stored to two decimal places.</p>
+      <div class="form-message" id="formMessage" role="alert" aria-live="polite"></div>
+      <div class="modal-actions"><button type="button" class="secondary-button" id="cancelButton">Cancel</button><button type="submit" class="primary-button" id="saveButton">Save Rate</button></div>
+    </form>
+  </div>
+</div>
+
+<script src="/js/rate-master.js"></script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+/* Extra styling for Rate Master and Vendor Master. Uses existing master.css theme. */
+.rv-message { min-height: 0; margin: 0 0 12px; font-size: 13px; color: var(--text-medium, #647069); }
+.rv-message:empty { display: none; }
+.rv-message.error { padding: 10px 12px; border-radius: 6px; background: var(--danger-bg, #f8e8e8); color: var(--danger-text, #9d3d3d); }
+.rv-message.success { padding: 10px 12px; border-radius: 6px; background: var(--success-bg, #e4f4e7); color: var(--success-text, #27713b); }
+.card-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 14px; flex-wrap: wrap; }
+#categoryFilter, #statusFilter { min-height: 42px; min-width: 190px; padding: 0 12px; border: 1px solid var(--border, #dde2dc); border-radius: 5px; background: #fff; color: var(--text-dark, #263029); font: inherit; }
+.rv-table { min-width: 920px; }
+.rv-table td { vertical-align: middle; }
+.rv-table .rate-number { text-align: right; }
+.rv-table td.rate-number { text-align: right; font-variant-numeric: tabular-nums; font-weight: 600; }
+.rv-action-button { min-height: 30px; padding: 5px 10px; border: 1px solid var(--border, #dde2dc); border-radius: 5px; background: #fff; color: var(--text-dark, #263029); cursor: pointer; font: inherit; font-size: 12px; }
+.rv-action-button:hover { background: var(--cream, #f5f3ec); }
+.rv-badge { display: inline-flex; padding: 5px 9px; border-radius: 999px; font-size: 11px; font-weight: 700; white-space: nowrap; }
+.rv-badge.active { color: var(--success-text, #27713b); background: var(--success-bg, #e4f4e7); }
+.rv-badge.inactive { color: var(--danger-text, #9d3d3d); background: var(--danger-bg, #f8e8e8); }
+.rv-modal { width: min(640px, calc(100vw - 30px)); max-height: calc(100vh - 40px); overflow-y: auto; }
+.modal-backdrop[hidden] { display: none !important; }
+.rv-form-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 16px; }
+.rv-form-grid .form-group input, .rv-form-grid .form-group select, .rv-form-grid .form-group textarea { width: 100%; min-height: 42px; padding: 9px 11px; border: 1px solid var(--border, #dde2dc); border-radius: 5px; color: var(--text-dark, #263029); font: inherit; background: white; }
+.rv-form-grid .form-group textarea { resize: vertical; }
+.rv-form-grid .rv-full-width { grid-column: 1 / -1; }
+.rv-form-help { margin: 4px 0 12px; color: var(--text-medium, #647069); font-size: 12px; line-height: 1.5; }
+.rv-form-grid .status-group .switch-row { margin-top: 0; }
+@media (max-width: 650px) { .rv-form-grid { grid-template-columns: 1fr; } .rv-form-grid .rv-full-width { grid-column: auto; } .rv-modal { padding: 18px; } }

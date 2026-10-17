@@ -22,6 +22,13 @@ namespace CHTManagement.Data
 
         public DbSet<Indent> Indents { get; set; }
 
+        public DbSet<ContractRate> ContractRates { get; set; }
+        public DbSet<Vendor> Vendors { get; set; }
+
+
+        public DbSet<VendorAssignment> VendorAssignments { get; set; }
+
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -39,6 +46,36 @@ namespace CHTManagement.Data
             modelBuilder.Entity<Vehicle>()
                 .HasIndex(x => x.VehicleCode)
                 .IsUnique();
+
+            modelBuilder.Entity<ContractRate>()
+    .Property(x => x.RateAmount)
+    .HasPrecision(18, 2);
+
+            modelBuilder.Entity<ContractRate>()
+                .HasIndex(x => new { x.ContractYear, x.VehicleCategory, x.SerialNo })
+                .IsUnique();
+
+            modelBuilder.Entity<Vendor>()
+                .HasIndex(x => x.VendorCode)
+                .IsUnique();
+
+            modelBuilder.Entity<VendorAssignment>()
+    .HasIndex(x => x.IndentId)
+    .IsUnique();
+
+            modelBuilder.Entity<VendorAssignment>()
+                .HasOne(x => x.Indent)
+                .WithOne()
+                .HasForeignKey<VendorAssignment>(x => x.IndentId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<VendorAssignment>()
+                .HasOne(x => x.Vendor)
+                .WithMany()
+                .HasForeignKey(x => x.VendorId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+
         }
     }
 }
