@@ -1,0 +1,102 @@
+/* Vehicle Demand Confirmation - CHT Management System */
+.vdc-page { min-width: 0; }
+.vdc-page-heading { align-items: flex-start; gap: 18px; }
+.vdc-notice { margin: 0 0 24px; padding: 16px 19px; border: 1px solid #d9e2d5; border-left: 4px solid #668067; border-radius: 6px; color: #526056; background: rgba(255,255,255,.6); font-size: 14px; line-height: 1.65; }
+.vdc-message { margin: 0 0 18px; border-radius: 6px; padding: 12px 15px; font-size: 13px; line-height: 1.5; }
+.vdc-message.success { color: #21683a; background: #e7f4e9; border: 1px solid #c5e5cd; }
+.vdc-message.error { color: #8c3030; background: #fbeaea; border: 1px solid #efc9c9; }
+.vdc-card-header { padding: 28px 30px 24px; display: flex; align-items: flex-start; justify-content: space-between; gap: 24px; border-bottom: 1px solid #e3e7e1; }
+.vdc-kicker { display: inline-block; font-size: 11px; font-weight: 800; letter-spacing: 1.5px; color: #516d52; margin-bottom: 9px; }
+.vdc-card-header h2 { color: #29352c; font-size: 25px; line-height: 1.2; margin: 0 0 8px; }
+.vdc-card-header p { color: #778179; font-size: 14px; line-height: 1.5; margin: 0; }
+.vdc-counts { display: flex; gap: 10px; flex-shrink: 0; }
+.vdc-count { min-width: 125px; border: 1px solid #dfe5de; border-radius: 8px; padding: 12px 15px; background: #fbfcfa; display: flex; flex-direction: column; gap: 5px; }
+.vdc-count strong { font-size: 25px; color: #2b392e; line-height: 1; }
+.vdc-count span { color: #78837a; font-size: 11px; }
+.vdc-toolbar { display: flex; justify-content: space-between; align-items: center; gap: 18px; padding: 18px 24px; }
+.vdc-toolbar .search-box { flex: 1; max-width: 550px; }
+.vdc-filter-label { display: flex; align-items: center; gap: 10px; color: #68736b; font-size: 13px; white-space: nowrap; }
+.vdc-filter-label select { min-width: 185px; min-height: 42px; padding: 8px 12px; border: 1px solid #d6ddd5; border-radius: 6px; background: #fff; color: #354138; font: inherit; }
+.vdc-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+.vdc-table thead th { padding: 15px 13px; text-align: left; background: #f7f8f5; border-bottom: 1px solid #dfe4dd; color: #667168; font-size: 10px; letter-spacing: .45px; white-space: nowrap; }
+.vdc-table tbody td { padding: 14px 13px; border-bottom: 1px solid #e8ece6; color: #47534a; vertical-align: middle; line-height: 1.45; }
+.vdc-table tbody tr:last-child td { border-bottom: 0; }
+.vdc-ref { font-weight: 700; color: #304834; }
+.vdc-indent-number { color: #263b2a; font-weight: 600; white-space: nowrap; }
+.vdc-status { display: inline-block; border-radius: 999px; padding: 6px 10px; font-size: 10px; font-weight: 750; white-space: nowrap; }
+.vdc-status.waiting { color: #875800; background: #fff0ce; }
+.vdc-status.complete { color: #206c3a; background: #e2f3e6; }
+.vdc-progress { min-width: 94px; }
+.vdc-progress strong { display: block; font-size: 12px; color: #344738; }
+.vdc-progress span { color: #869087; font-size: 10px; }
+.vdc-vendor strong, .vdc-vendor span { display: block; }
+.vdc-vendor strong { font-size: 12px; color: #334338; }
+.vdc-vendor span { font-size: 10px; color: #7d887f; }
+.vdc-button { border: 0; border-radius: 5px; padding: 10px 12px; font: inherit; font-size: 11px; font-weight: 700; cursor: pointer; white-space: nowrap; }
+.vdc-button:disabled { opacity: .6; cursor: not-allowed; }
+.vdc-button.primary { background: #526e55; color: #fff; }
+.vdc-button.primary:hover { background: #3d5a43; }
+.vdc-button.secondary { border: 1px solid #d7dfd5; background: #fff; color: #3f5a42; }
+.vdc-button.secondary:hover { background: #f3f6f1; }
+.vdc-table-footer { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 17px 22px; color: #829087; font-size: 12px; border-top: 1px solid #e5e9e3; }
+.vdc-muted { text-align: right; }
+.vdc-footer-note { margin: 18px 2px; color: #828c83; font-size: 12px; line-height: 1.6; }
+.vdc-modal-backdrop { position: fixed; inset: 0; z-index: 1000; padding: 22px; display: flex; align-items: center; justify-content: center; overflow: auto; background: rgba(9, 17, 12, .65); backdrop-filter: blur(3px); }
+.vdc-modal-backdrop[hidden] { display: none !important; }
+.vdc-modal { width: min(760px, 100%); max-height: calc(100vh - 44px); overflow-y: auto; border-radius: 10px; border: 1px solid #dce3da; background: #fff; box-shadow: 0 24px 70px rgba(0,0,0,.32); color: #2b372d; }
+.vdc-modal-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 18px; padding: 25px 28px 20px; border-bottom: 1px solid #e6ebe4; }
+.vdc-modal-header h2 { font-size: 22px; line-height: 1.25; margin: 0 0 6px; }
+.vdc-modal-header p { margin: 0; color: #778279; font-size: 13px; line-height: 1.5; }
+.vdc-modal-close { width: 34px; height: 34px; border: 1px solid #e1e6df; border-radius: 6px; background: #fff; color: #435147; font-size: 23px; cursor: pointer; flex-shrink: 0; }
+.vdc-context-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; padding: 18px 28px 2px; }
+.vdc-context-grid > div { padding: 10px 12px; background: #f7f8f5; border: 1px solid #e5e9e3; border-radius: 6px; min-width: 0; }
+.vdc-context-grid span { display: block; color: #829087; font-size: 10px; margin-bottom: 5px; text-transform: uppercase; letter-spacing: .55px; }
+.vdc-context-grid strong { display: block; color: #39473c; font-size: 12px; overflow-wrap: anywhere; }
+.vdc-form-grid { padding: 19px 28px 8px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px 18px; }
+.vdc-field { min-width: 0; }
+.vdc-field label { display: block; margin-bottom: 7px; color: #465248; font-size: 12px; font-weight: 700; }
+.vdc-field label span { color: #b14b42; }
+.vdc-field input { width: 100%; min-height: 43px; padding: 10px 12px; border: 1px solid #d8dfd6; border-radius: 5px; outline: none; font: inherit; font-size: 13px; color: #2f3b31; background: #fff; }
+.vdc-field input:focus { border-color: #7a987c; box-shadow: 0 0 0 3px rgba(102,128,103,.13); }
+.vdc-field input[type=file] { padding: 8px; font-size: 11px; }
+.vdc-field small { display: block; margin-top: 7px; color: #828c83; font-size: 11px; line-height: 1.5; }
+.vdc-photo-field { grid-column: 1 / -1; }
+.vdc-photo-preview-wrap { display: flex; align-items: center; gap: 12px; margin-top: 10px; padding: 9px; border: 1px solid #e2e8e0; border-radius: 6px; color: #6d796f; font-size: 11px; overflow-wrap: anywhere; }
+.vdc-photo-preview-wrap img { width: 90px; height: 64px; object-fit: cover; border-radius: 4px; background: #edf1eb; }
+.vdc-form-message { min-height: 0; margin: 0 28px; color: #9b3838; font-size: 12px; line-height: 1.5; }
+.vdc-form-message:empty { display: none; }
+.vdc-modal-actions { display: flex; justify-content: flex-end; gap: 10px; padding: 18px 28px 25px; }
+.vdc-modal-actions button { min-height: 42px; padding: 10px 16px; border-radius: 5px; font: inherit; font-size: 12px; font-weight: 700; cursor: pointer; }
+.vdc-modal-actions .secondary-button { border: 1px solid #d7dfd5; background: #fff; color: #4f6151; }
+.vdc-modal-actions .primary-button { border: 1px solid #526e55; background: #526e55; color: #fff; }
+.vdc-modal-actions .primary-button:disabled { opacity: .65; cursor: wait; }
+.vdc-details-modal { width: min(900px, 100%); }
+.vdc-details-content { padding: 20px 28px; }
+.vdc-confirmation-card { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr) auto; gap: 16px; align-items: center; padding: 15px 0; border-bottom: 1px solid #e6ebe4; }
+.vdc-confirmation-card:last-child { border-bottom: 0; }
+.vdc-confirmation-card strong { display: block; color: #334238; font-size: 13px; margin-bottom: 5px; }
+.vdc-confirmation-card span { display: block; color: #78837a; font-size: 11px; line-height: 1.7; overflow-wrap: anywhere; }
+.vdc-photo-modal { width: min(800px, 100%); }
+.vdc-photo-viewer { display: flex; align-items: center; justify-content: center; padding: 20px; min-height: 180px; background: #f4f6f2; }
+.vdc-photo-viewer img { display: block; max-width: 100%; max-height: 65vh; object-fit: contain; border-radius: 5px; }
+.vdc-photo-viewer img[hidden] { display: none; }
+.vdc-photo-modal .vdc-form-message { margin-top: 12px; }
+@media (max-width: 1100px) { .vdc-table { min-width: 1150px; } }
+@media (max-width: 760px) {
+    .vdc-card-header { flex-direction: column; padding: 22px 18px; }
+    .vdc-counts { width: 100%; }
+    .vdc-count { flex: 1; min-width: 0; }
+    .vdc-toolbar { align-items: stretch; flex-direction: column; padding: 16px; }
+    .vdc-toolbar .search-box { max-width: none; }
+    .vdc-filter-label { justify-content: space-between; }
+    .vdc-filter-label select { flex: 1; }
+    .vdc-table-footer { align-items: flex-start; flex-direction: column; padding: 15px 16px; }
+    .vdc-muted { text-align: left; }
+    .vdc-context-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); padding: 16px 18px 0; }
+    .vdc-form-grid { grid-template-columns: 1fr; padding: 18px; }
+    .vdc-modal-header { padding: 21px 18px 17px; }
+    .vdc-form-message { margin: 0 18px; }
+    .vdc-modal-actions { padding: 16px 18px 20px; }
+    .vdc-details-content { padding: 16px 18px; }
+    .vdc-confirmation-card { grid-template-columns: 1fr; gap: 10px; }
+}

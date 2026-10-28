@@ -115,6 +115,20 @@ namespace CHTManagement.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
+                    b.Property<string>("CioActionBy")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<DateTime?>("CioApprovedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ClerkActionBy")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<DateTime?>("ClerkApprovedAt")
+                        .HasColumnType("datetime2");
+
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
@@ -175,6 +189,10 @@ namespace CHTManagement.Migrations
 
                     b.Property<string>("ReasonRegimentalStandingDutyTransportNotUtilized")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RegisterRemarks")
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
 
                     b.Property<DateTime?>("RequiredDateTime")
                         .HasColumnType("datetime2");
@@ -305,6 +323,85 @@ namespace CHTManagement.Migrations
                     b.ToTable("Vehicles");
                 });
 
+            modelBuilder.Entity("CHTManagement.Models.VehicleDemandConfirmation", b =>
+                {
+                    b.Property<int>("VehicleDemandConfirmationId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("VehicleDemandConfirmationId"));
+
+                    b.Property<string>("ChallanControlNumber")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("ClerkInitials")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<DateTime>("ConfirmationDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("ConfirmedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ConfirmedBy")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("DriverName")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
+
+                    b.Property<int>("IndentId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("LicenseNumber")
+                        .IsRequired()
+                        .HasMaxLength(60)
+                        .HasColumnType("nvarchar(60)");
+
+                    b.Property<string>("MobileNumber")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
+
+                    b.Property<string>("NcoInCharge")
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
+
+                    b.Property<string>("Oic")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("Remarks")
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
+
+                    b.Property<string>("VehicleNumber")
+                        .IsRequired()
+                        .HasMaxLength(40)
+                        .HasColumnType("nvarchar(40)");
+
+                    b.Property<string>("VehiclePhotoContentType")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
+
+                    b.Property<string>("VehiclePhotoFileName")
+                        .IsRequired()
+                        .HasMaxLength(80)
+                        .HasColumnType("nvarchar(80)");
+
+                    b.HasKey("VehicleDemandConfirmationId");
+
+                    b.HasIndex("IndentId", "VehicleNumber")
+                        .IsUnique();
+
+                    b.ToTable("VehicleDemandConfirmations");
+                });
+
             modelBuilder.Entity("CHTManagement.Models.Vendor", b =>
                 {
                     b.Property<int>("VendorId")
@@ -373,7 +470,8 @@ namespace CHTManagement.Migrations
 
                     b.HasKey("VendorAssignmentId");
 
-                    b.HasIndex("IndentId");
+                    b.HasIndex("IndentId")
+                        .IsUnique();
 
                     b.HasIndex("VendorId");
 
@@ -404,18 +502,29 @@ namespace CHTManagement.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("CHTManagement.Models.VendorAssignment", b =>
+            modelBuilder.Entity("CHTManagement.Models.VehicleDemandConfirmation", b =>
                 {
                     b.HasOne("CHTManagement.Models.Indent", "Indent")
                         .WithMany()
                         .HasForeignKey("IndentId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Indent");
+                });
+
+            modelBuilder.Entity("CHTManagement.Models.VendorAssignment", b =>
+                {
+                    b.HasOne("CHTManagement.Models.Indent", "Indent")
+                        .WithOne()
+                        .HasForeignKey("CHTManagement.Models.VendorAssignment", "IndentId")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("CHTManagement.Models.Vendor", "Vendor")
                         .WithMany()
                         .HasForeignKey("VendorId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Indent");

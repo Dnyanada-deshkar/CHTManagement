@@ -96,6 +96,10 @@ namespace CHTManagement.Controllers
             }
 
             indent.Status = ApprovedByCio;
+            indent.CioActionBy = User.Identity?.Name;
+            indent.CioApprovedAt = DateTime.Now;
+
+
             await _context.SaveChangesAsync();
 
             return Ok(new

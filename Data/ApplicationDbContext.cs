@@ -28,6 +28,9 @@ namespace CHTManagement.Data
 
         public DbSet<VendorAssignment> VendorAssignments { get; set; }
 
+        public DbSet<VehicleDemandConfirmation> VehicleDemandConfirmations { get; set; }
+
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -73,6 +76,17 @@ namespace CHTManagement.Data
                 .HasOne(x => x.Vendor)
                 .WithMany()
                 .HasForeignKey(x => x.VendorId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+
+            modelBuilder.Entity<VehicleDemandConfirmation>()
+    .HasIndex(x => new { x.IndentId, x.VehicleNumber })
+    .IsUnique();
+
+            modelBuilder.Entity<VehicleDemandConfirmation>()
+                .HasOne(x => x.Indent)
+                .WithMany()
+                .HasForeignKey(x => x.IndentId)
                 .OnDelete(DeleteBehavior.Restrict);
 
 

@@ -95,5 +95,20 @@ namespace CHTManagement.Models
 
         public DateTime CreatedAt { get; set; }
             = DateTime.Now;
+
+
+        [MaxLength(100)]
+        public string? ClerkActionBy { get; set; }
+
+        public DateTime? ClerkApprovedAt { get; set; }
+
+        [MaxLength(100)]
+        public string? CioActionBy { get; set; }
+
+        public DateTime? CioApprovedAt { get; set; }
+
+        [MaxLength(1000)]
+        public string? RegisterRemarks { get; set; }
+
     }
 }

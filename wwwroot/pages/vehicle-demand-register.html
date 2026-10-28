@@ -1,0 +1,87 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vehicle Demand Register - CHT Management</title>
+  <link rel="stylesheet" href="/css/vehicle-demand-register.css">
+
+    <link rel="stylesheet" href="/css/shared-sidebar.css">
+</head>
+<body>
+  <div class="register-shell">
+    <header class="register-topbar">
+      <div>
+        <div class="brand-kicker">LEH 503 ASC BN · CHT Management</div>
+        <h1>Vehicle Demand Register</h1>
+      </div>
+      <div class="toolbar-actions">
+        <a class="secondary-button" href="/pages/vehicle-demand-confirmation.html">Vehicle Confirmation</a>
+        <a class="secondary-button" href="/pages/dashboard.html">Dashboard</a>
+        <button class="primary-button" id="refreshButton" type="button">Refresh list</button>
+      </div>
+    </header>
+
+    <div id="pageMessage" class="message" role="status" aria-live="polite"></div>
+
+    <section class="card">
+      <div class="card-heading">
+        <div>
+          <div class="section-kicker">PAPER REGISTER ALIGNMENT</div>
+          <h2>Confirmed physical vehicles</h2>
+        </div>
+        <div class="count-box"><strong id="rowCount">0</strong><span>vehicle records</span></div>
+      </div>
+
+      <div class="toolbar">
+        <input id="searchInput" type="search" placeholder="Search vehicle, unit, driver, indent or challan">
+      </div>
+
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>S No</th><th>Date</th><th>Veh No</th><th>Type of Veh</th>
+              <th>Name of Unit</th><th>From</th><th>To</th><th>Driver Name</th>
+              <th>Lic No</th><th>Mob No</th><th>NCO I/C</th><th>Clk</th>
+              <th>OIC</th><th>Challan Cont No</th><th>Remarks</th><th>Workflow Status</th><th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="registerTableBody">
+            <tr><td colspan="17" class="table-state">Loading vehicle demand register…</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <footer class="card-footer"><span id="footerSummary">Loading…</span><span>Fields added here do not change workflow status.</span></footer>
+    </section>
+  </div>
+
+  <div id="editModal" class="modal-backdrop" hidden>
+    <section class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modal-header">
+        <div><div class="section-kicker">REGISTER DETAILS</div><h2 id="modalTitle">Edit vehicle register fields</h2></div>
+        <button type="button" class="icon-button" id="closeModalButton" aria-label="Close">×</button>
+      </div>
+      <form id="editForm">
+        <input type="hidden" id="confirmationId">
+        <div class="form-grid">
+          <label>NCO I/C<input id="ncoInCharge" maxlength="150"></label>
+          <label>Clk<input id="clerkInitials" maxlength="100"></label>
+          <label>OIC<input id="oic" maxlength="100"></label>
+          <label>Challan Cont No<input id="challanControlNumber" maxlength="100"></label>
+          <label class="full-width">Remarks<textarea id="remarks" maxlength="1000" rows="3"></textarea></label>
+        </div>
+        <div id="formMessage" class="form-message" role="alert" aria-live="polite"></div>
+        <div class="modal-actions">
+          <button type="button" class="secondary-button" id="cancelButton">Cancel</button>
+          <button type="submit" class="primary-button" id="saveButton">Save register fields</button>
+        </div>
+      </form>
+    </section>
+  </div>
+
+  <script src="/js/vehicle-demand-register.js"></script>
+
+    <script src="/js/shared-sidebar.js"></script>
+</body>
+</html>

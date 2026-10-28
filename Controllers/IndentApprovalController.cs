@@ -96,6 +96,12 @@ namespace CHTManagement.Controllers
             }
 
             indent.Status = PendingWithCio;
+            indent.ClerkActionBy = User.Identity?.Name;
+            indent.ClerkApprovedAt = DateTime.Now;
+
+
+
+
             await _context.SaveChangesAsync();
 
             return Ok(new

@@ -1,0 +1,68 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Log Register - CHT Management</title>
+  <link rel="stylesheet" href="/css/indent-log-register.css">
+
+    <link rel="stylesheet" href="/css/shared-sidebar.css">
+</head>
+<body>
+  <div class="register-shell">
+    <header class="register-topbar">
+      <div>
+        <div class="brand-kicker">LEH 503 ASC BN · CHT Management</div>
+        <h1>Log Register</h1>
+        <p>Digital view of the paper log register for CHT-Clerk and CHT-CIO.</p>
+      </div>
+      <div class="toolbar-actions">
+        <a class="secondary-button" href="/pages/dashboard.html">Dashboard</a>
+        <button class="primary-button" id="refreshButton" type="button">Refresh list</button>
+      </div>
+    </header>
+
+    <div id="pageMessage" class="message" role="status" aria-live="polite"></div>
+
+    <section class="card">
+      <div class="card-heading">
+        <div>
+          <div class="section-kicker">REGISTER FIELDS</div>
+          <h2>All submitted indent logs</h2>
+        </div>
+        <div class="count-box"><strong id="rowCount">0</strong><span>records</span></div>
+      </div>
+
+      <div class="toolbar">
+        <input id="searchInput" type="search" placeholder="Search serial, unit, indent, message or status">
+      </div>
+
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>Ser No</th>
+              <th>Date</th>
+              <th>From</th>
+              <th>To</th>
+              <th class="message-column">Content of Msg</th>
+              <th>CHT Clk</th>
+              <th>OIC CHT</th>
+              <th>Remarks</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="registerTableBody">
+            <tr><td colspan="9" class="table-state">Loading log register…</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <footer class="card-footer"><span id="footerSummary">Loading…</span><span>Remarks are optional.</span></footer>
+    </section>
+  </div>
+
+  <script src="/js/indent-log-register.js"></script>
+
+    <script src="/js/shared-sidebar.js"></script>
+</body>
+</html>

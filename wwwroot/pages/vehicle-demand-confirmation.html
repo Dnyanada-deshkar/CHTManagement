@@ -1,0 +1,215 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vehicle Demand Confirmation - CHT Management</title>
+    <link rel="stylesheet" href="/css/master.css">
+    <link rel="stylesheet" href="/css/vehicle-demand-confirmation.css">
+
+    <link rel="stylesheet" href="/css/shared-sidebar.css">
+</head>
+<body>
+<div class="app-shell">
+    <aside class="sidebar">
+        <div class="sidebar-brand">
+            <div class="sidebar-emblem"><span></span><span></span><i></i></div>
+            <div class="brand-text"><strong>LEH 503 ASC BN</strong><span>CHT Management System</span></div>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="/pages/dashboard.html" class="nav-item"><span class="nav-icon">⌂</span><span>Dashboard</span></a>
+            <div class="nav-section-title">MASTERS</div>
+            <a href="/pages/location-type-master.html" class="nav-item"><span class="nav-icon">▦</span><span>Location Type Master</span></a>
+            <a href="/pages/location-master.html" class="nav-item"><span class="nav-icon">⌖</span><span>Location Master</span></a>
+            <a href="/pages/vehicle-master.html" class="nav-item"><span class="nav-icon">▣</span><span>Vehicle Master</span></a>
+            <a href="/pages/rate-master.html" class="nav-item"><span class="nav-icon">₹</span><span>Rate Master</span></a>
+            <a href="/pages/vendor-master.html" class="nav-item"><span class="nav-icon">▤</span><span>Vendor Master</span></a>
+            <div class="nav-section-title">WORKFLOW</div>
+            <a href="/pages/indent-registration.html" class="nav-item"><span class="nav-icon">＋</span><span>Indent Registration</span></a>
+            <a href="/pages/clerk-approval.html" class="nav-item"><span class="nav-icon">✓</span><span>Clerk Approval</span></a>
+            <a href="/pages/cio-approval.html" class="nav-item"><span class="nav-icon">✓</span><span>CIO Approval</span></a>
+            <a href="/pages/vendor-assignment.html" class="nav-item"><span class="nav-icon">⇄</span><span>Vendor Assignment</span></a>
+            <a href="/pages/vehicle-demand-confirmation.html" class="nav-item active"><span class="nav-icon">▣</span><span>Vehicle Demand Confirmation</span></a>
+        </nav>
+        <div class="sidebar-footer"><span>CHT MANAGEMENT</span><small>Internal Operations</small></div>
+    </aside>
+
+    <main class="main-area">
+        <header class="topbar">
+            <button type="button" class="menu-button" id="menuButton" aria-label="Toggle navigation">☰</button>
+            <div class="topbar-right">
+                <div class="user-profile">
+                    <div class="user-avatar"><span id="userInitial">U</span></div>
+                    <div class="user-info"><strong id="headerUsername">User</strong><span id="headerRole">-</span></div>
+                </div>
+            </div>
+        </header>
+
+        <section class="page-content vdc-page">
+            <div class="page-heading vdc-page-heading">
+                <div>
+                    <div class="breadcrumb">Workflow <span>/</span> Vehicle Demand Confirmation</div>
+                    <h1>Vehicle Demand Confirmation</h1>
+                    <p>Record each assigned vehicle, its driver details and an actual vehicle photo.</p>
+                </div>
+                <button type="button" class="primary-button" id="refreshButton"><span class="button-plus">↻</span> Refresh list</button>
+            </div>
+
+            <div class="vdc-notice" role="note">
+                Only indent logs with status <strong>Assigned to Vendor</strong> can receive vehicle confirmations. Each submission records one physical vehicle. Once the number of confirmed vehicles reaches the quantity requested in the indent, the status changes to <strong>Vehicle Demand Confirmed</strong>.
+            </div>
+
+            <div id="pageMessage" class="vdc-message" role="status" aria-live="polite" hidden></div>
+
+            <section class="content-card">
+                <div class="vdc-card-header">
+                    <div>
+                        <span class="vdc-kicker">VEHICLE DEMAND REGISTER</span>
+                        <h2>Vendor-assigned indent references</h2>
+                    </div>
+                    <div class="vdc-counts">
+                        <div class="vdc-count"><strong id="awaitingCount">—</strong><span>Awaiting confirmation</span></div>
+                        <div class="vdc-count"><strong id="completedCount">—</strong><span>Demand completed</span></div>
+                    </div>
+                </div>
+
+                <div class="card-toolbar vdc-toolbar">
+                    <div class="search-box">
+                        <span class="search-icon">⌕</span>
+                        <input type="search" id="searchInput" placeholder="Search log ref, indent, unit, vehicle or vendor..." autocomplete="off">
+                    </div>
+                    <label class="vdc-filter-label" for="statusFilter">Show
+                        <select id="statusFilter">
+                            <option value="all">All assigned logs</option>
+                            <option value="pending">Awaiting confirmation</option>
+                            <option value="complete">Demand completed</option>
+                        </select>
+                    </label>
+                </div>
+
+                <div class="table-wrapper">
+                    <table class="vdc-table">
+                        <thead>
+                            <tr>
+                                <th>DATE</th>
+                                <th>LOG REF.</th>
+                                <th>INDENT NUMBER</th>
+                                <th>NAME OF UNIT</th>
+                                <th>FROM</th>
+                                <th>TO</th>
+                                <th>TYPE OF VEH.</th>
+                                <th>VENDOR</th>
+                                <th>CONFIRMED</th>
+                                <th>STATUS</th>
+                                <th>ACTION</th>
+                            </tr>
+                        </thead>
+                        <tbody id="demandTableBody">
+                            <tr><td colspan="11" class="table-state">Loading vendor-assigned indent logs...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="table-footer vdc-table-footer">
+                    <span id="recordSummary">Loading...</span>
+                    <span id="quantityNote" class="vdc-muted">One confirmation is required per physical vehicle.</span>
+                </div>
+            </section>
+
+        </section>
+    </main>
+</div>
+
+<!-- Confirmation entry modal -->
+<div class="vdc-modal-backdrop" id="confirmationModal" hidden>
+    <section class="vdc-modal" role="dialog" aria-modal="true" aria-labelledby="confirmationModalTitle">
+        <header class="vdc-modal-header">
+            <div>
+                <span class="vdc-kicker">VEHICLE REGISTER</span>
+                <h2 id="confirmationModalTitle">Add vehicle confirmation</h2>
+                <p id="modalIndentSummary">Indent details</p>
+            </div>
+            <button type="button" class="vdc-modal-close" id="closeConfirmationModal" aria-label="Close">×</button>
+        </header>
+        <form id="confirmationForm" enctype="multipart/form-data">
+            <div class="vdc-context-grid">
+                <div><span>Unit</span><strong id="contextUnit">—</strong></div>
+                <div><span>From</span><strong id="contextFrom">—</strong></div>
+                <div><span>To</span><strong id="contextTo">—</strong></div>
+                <div><span>Type of vehicle</span><strong id="contextVehicleType">—</strong></div>
+                <div><span>Assigned vendor</span><strong id="contextVendor">—</strong></div>
+                <div><span>Vehicle count</span><strong id="contextCount">—</strong></div>
+            </div>
+
+            <div class="vdc-form-grid">
+                <div class="vdc-field">
+                    <label for="confirmationDate">Date <span>*</span></label>
+                    <input type="date" id="confirmationDate" name="ConfirmationDate" required>
+                </div>
+                <div class="vdc-field">
+                    <label for="vehicleNumber">Vehicle number <span>*</span></label>
+                    <input type="text" id="vehicleNumber" name="VehicleNumber" maxlength="40" placeholder="e.g. TEST-VEH-001" autocomplete="off" required>
+                </div>
+                <div class="vdc-field">
+                    <label for="driverName">Driver name <span>*</span></label>
+                    <input type="text" id="driverName" name="DriverName" maxlength="150" placeholder="Enter driver's full name" autocomplete="off" required>
+                </div>
+                <div class="vdc-field">
+                    <label for="licenseNumber">Licence number <span>*</span></label>
+                    <input type="text" id="licenseNumber" name="LicenseNumber" maxlength="60" placeholder="Enter licence number" autocomplete="off" required>
+                </div>
+                <div class="vdc-field">
+                    <label for="mobileNumber">Mobile number <span>*</span></label>
+                    <input type="tel" id="mobileNumber" name="MobileNumber" maxlength="30" placeholder="Enter contact number" autocomplete="tel" required>
+                </div>
+                <div class="vdc-field vdc-photo-field">
+                    <label for="vehiclePhoto">Vehicle photo <span>*</span></label>
+                    <input type="file" id="vehiclePhoto" name="VehiclePhoto" accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp" required>
+                    <small>Upload a clear photo of the actual vehicle. JPEG, PNG or WebP; maximum 5 MB.</small>
+                    <div id="photoPreviewWrap" class="vdc-photo-preview-wrap" hidden>
+                        <img id="photoPreview" alt="Selected vehicle photo preview">
+                        <span id="photoPreviewName"></span>
+                    </div>
+                </div>
+            </div>
+            <div id="formMessage" class="vdc-form-message" role="alert" aria-live="polite"></div>
+            <footer class="vdc-modal-actions">
+                <button type="button" class="secondary-button" id="cancelConfirmation">Cancel</button>
+                <button type="submit" class="primary-button" id="saveConfirmation">Save vehicle confirmation</button>
+            </footer>
+        </form>
+    </section>
+</div>
+
+<!-- Existing confirmations modal -->
+<div class="vdc-modal-backdrop" id="detailsModal" hidden>
+    <section class="vdc-modal vdc-details-modal" role="dialog" aria-modal="true" aria-labelledby="detailsModalTitle">
+        <header class="vdc-modal-header">
+            <div>
+                <span class="vdc-kicker">CONFIRMATION HISTORY</span>
+                <h2 id="detailsModalTitle">Confirmed vehicles</h2>
+                <p id="detailsModalSubtitle"></p>
+            </div>
+            <button type="button" class="vdc-modal-close" id="closeDetailsModal" aria-label="Close">×</button>
+        </header>
+        <div id="confirmationDetailsContent" class="vdc-details-content"></div>
+        <footer class="vdc-modal-actions"><button type="button" class="secondary-button" id="closeDetailsFooter">Close</button></footer>
+    </section>
+</div>
+
+<!-- Authenticated photo viewer -->
+<div class="vdc-modal-backdrop vdc-photo-backdrop" id="photoModal" hidden>
+    <section class="vdc-modal vdc-photo-modal" role="dialog" aria-modal="true" aria-labelledby="photoModalTitle">
+        <header class="vdc-modal-header">
+            <div><h2 id="photoModalTitle">Vehicle photo</h2><p id="photoModalSubtitle"></p></div>
+            <button type="button" class="vdc-modal-close" id="closePhotoModal" aria-label="Close photo">×</button>
+        </header>
+        <div class="vdc-photo-viewer"><img id="vehiclePhotoViewer" alt="Confirmed vehicle"></div>
+        <div id="photoViewMessage" class="vdc-form-message" role="status" aria-live="polite"></div>
+    </section>
+</div>
+
+<script src="/js/vehicle-demand-confirmation.js"></script>
+
+    <script src="/js/shared-sidebar.js"></script>
+</body>
+</html>
