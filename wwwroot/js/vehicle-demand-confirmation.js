@@ -1,4 +1,4 @@
-"use strict";
+﻿"use strict";
 
 const VEHICLE_DEMAND_API = "/api/vehicle-demand-confirmation";
 const token = sessionStorage.getItem("token");
@@ -148,8 +148,8 @@ function renderRows() {
         if (selected === "pending" && complete) return false;
         if (selected === "complete" && !complete) return false;
         const fields = [item.logReference, item.indentNumber, item.unitName, item.fromLocation, item.destination,
-            item.vehicleType, item.assignedVendorCode, item.assignedVendorName, item.status,
-            ...(item.confirmations || []).flatMap(c => [c.vehicleNumber, c.driverName])];
+        item.vehicleType, item.assignedVendorCode, item.assignedVendorName, item.status,
+        ...(item.confirmations || []).flatMap(c => [c.vehicleNumber, c.driverName])];
         return !term || fields.some(value => String(value ?? "").toLowerCase().includes(term));
     });
 

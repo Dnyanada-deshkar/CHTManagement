@@ -1,4 +1,3 @@
-﻿
 using System;
 using System.ComponentModel.DataAnnotations;
 
@@ -27,6 +26,10 @@ namespace CHTManagement.Models
         public int? VehicleId { get; set; }
         public Vehicle? Vehicle { get; set; }
 
+        // Added from the Form for Hiring of Civil Transport - Part I.
+        [MaxLength(250)]
+        public string? TypeOfLoad { get; set; }
+
         public int? WhereRequiredLocationId { get; set; }
         public Location? WhereRequiredLocation { get; set; }
 
@@ -40,18 +43,13 @@ namespace CHTManagement.Models
         [MaxLength(500)]
         public string? ViaRoute { get; set; }
 
-        public string? ExactNatureOfDutyWithAuthority
-        { get; set; }
+        public string? ExactNatureOfDutyWithAuthority { get; set; }
 
-        public string?
-            ReasonRegimentalStandingDutyTransportNotUtilized
-        { get; set; }
+        public string? ReasonRegimentalStandingDutyTransportNotUtilized { get; set; }
 
-        public string? ReasonForUsingCHTOnSundayHoliday
-        { get; set; }
+        public string? ReasonForUsingCHTOnSundayHoliday { get; set; }
 
-        public string? ReasonForUsingCHTToRailConnectedDestination
-        { get; set; }
+        public string? ReasonForUsingCHTToRailConnectedDestination { get; set; }
 
         // Part I - Certification
         [MaxLength(100)]
@@ -64,38 +62,12 @@ namespace CHTManagement.Models
 
         public DateTime? CertifyingOfficerDate { get; set; }
 
-        // Part II - STO's Transport Order
-        [MaxLength(100)]
-        public string? HiringTransportRegisterSerialNumber
-        { get; set; }
-
-        [MaxLength(100)]
-        public string? BudgetHead { get; set; }
-
-        public DateTime? TransportSupplyDateTime { get; set; }
-
-        public string? DetailsOfJourney { get; set; }
-
-        [MaxLength(100)]
-        public string? DurationOfDutyDaysHours { get; set; }
-
-        [MaxLength(100)]
-        public string? OrderStation { get; set; }
-
-        public DateTime? OrderDate { get; set; }
-
-        [MaxLength(200)]
-        public string? IssuingOfficerRankNameDesignation
-        { get; set; }
-
         // Workflow
         [Required]
         [MaxLength(50)]
         public string Status { get; set; } = "Draft";
 
-        public DateTime CreatedAt { get; set; }
-            = DateTime.Now;
-
+        public DateTime CreatedAt { get; set; } = DateTime.Now;
 
         [MaxLength(100)]
         public string? ClerkActionBy { get; set; }
@@ -109,6 +81,5 @@ namespace CHTManagement.Models
 
         [MaxLength(1000)]
         public string? RegisterRemarks { get; set; }
-
     }
 }

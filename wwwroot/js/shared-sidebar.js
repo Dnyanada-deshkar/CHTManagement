@@ -30,6 +30,7 @@
             <a class="nav-link nav-item role-link" data-role="CHT-CIO" href="/pages/cio-approval.html"><span class="nav-icon" aria-hidden="true">◈</span><span>CIO Approval</span></a>
             <a class="nav-link nav-item role-link" data-role="CHT-Clerk,CHT-CIO" href="/pages/vendor-assignment.html"><span class="nav-icon" aria-hidden="true">⇄</span><span>Vendor Assignment</span></a>
             <a class="nav-link nav-item role-link" data-role="CHT-Clerk,CHT-CIO" href="/pages/vehicle-demand-confirmation.html"><span class="nav-icon" aria-hidden="true">▣</span><span>Vehicle Demand Confirmation</span></a>
+            <a class="nav-link nav-item role-link" data-role="CHT-Clerk,CHT-CIO" href="/pages/transport-utilization.html"><span class="nav-icon" aria-hidden="true">▤</span><span>Transport Utilization</span></a>
 
             <div class="nav-caption nav-section-title">REGISTERS</div>
             <a class="nav-link nav-item role-link" data-role="CHT-Clerk,CHT-CIO" href="/pages/indent-log-register.html"><span class="nav-icon" aria-hidden="true">☷</span><span>Indent Log Register</span></a>

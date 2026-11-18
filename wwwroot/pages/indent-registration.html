@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -6,7 +6,6 @@
     <title>Indent Log Registration - CHT Management</title>
     <link rel="stylesheet" href="/css/master.css">
     <link rel="stylesheet" href="/css/indent-registration.css">
-
     <link rel="stylesheet" href="/css/shared-sidebar.css">
 </head>
 <body>
@@ -65,7 +64,7 @@
                     <div>
                         <div class="breadcrumb">Transport <span>/</span> Indent Log Registration</div>
                         <h1>Indent Log Registration Form</h1>
-                        
+                        <p>Record the details from the signed Transport Indent and Order Form.</p>
                     </div>
                 </div>
 
@@ -77,6 +76,7 @@
                             <div>
                                 <span class="indent-kicker">PART I</span>
                                 <h2>Transport Requirement</h2>
+                                <p>Enter the transport requirement and journey details exactly as recorded on the signed form.</p>
                             </div>
                         </div>
 
@@ -116,6 +116,10 @@
                                 <select id="whereRequiredLocationId" name="whereRequiredLocationId" required>
                                     <option value="">Loading locations...</option>
                                 </select>
+                            </div>
+                            <div class="indent-field">
+                                <label for="typeOfLoad">Type of load <span class="required-mark">*</span></label>
+                                <input id="typeOfLoad" name="typeOfLoad" type="text" maxlength="250" required autocomplete="off" placeholder="Describe the stores / personnel / load type">
                             </div>
                             <div class="indent-field">
                                 <label for="durationOfEmployment">7. Duration of employment (hours/days) <span class="required-mark">*</span></label>
@@ -180,49 +184,7 @@
                         </div>
                     </section>
 
-                    <section class="content-card indent-section">
-                        <div class="indent-section-heading">
-                            <div>
-                                <span class="indent-kicker">PART II</span>
-                                <h2>STO's Transport Order</h2>
-                                <p>Record Part II values if they are available on the source form at registration time.</p>
-                            </div>
-                        </div>
-                        <div class="indent-field-grid">
-                            <div class="indent-field">
-                                <label for="hiringTransportRegisterSerialNumber">Serial number of register for hiring transport</label>
-                                <input id="hiringTransportRegisterSerialNumber" name="hiringTransportRegisterSerialNumber" type="text" maxlength="100">
-                            </div>
-                            <div class="indent-field">
-                                <label for="budgetHead">Debitable to budget head</label>
-                                <input id="budgetHead" name="budgetHead" type="text" maxlength="100" value="105F/1/255/01 &amp; 02">
-                            </div>
-                            <div class="indent-field">
-                                <label for="transportSupplyDateTime">Time/date transport supplied</label>
-                                <input id="transportSupplyDateTime" name="transportSupplyDateTime" type="datetime-local">
-                            </div>
-                            <div class="indent-field">
-                                <label for="durationOfDutyDaysHours">Duration of duty (days/hours)</label>
-                                <input id="durationOfDutyDaysHours" name="durationOfDutyDaysHours" type="text" maxlength="100">
-                            </div>
-                            <div class="indent-field indent-field-wide">
-                                <label for="detailsOfJourney">Details of journey</label>
-                                <textarea id="detailsOfJourney" name="detailsOfJourney" rows="2"></textarea>
-                            </div>
-                            <div class="indent-field">
-                                <label for="orderStation">Order — Station</label>
-                                <input id="orderStation" name="orderStation" type="text" maxlength="100">
-                            </div>
-                            <div class="indent-field">
-                                <label for="orderDate">Order — Date</label>
-                                <input id="orderDate" name="orderDate" type="date">
-                            </div>
-                            <div class="indent-field indent-field-wide">
-                                <label for="issuingOfficerRankNameDesignation">Issuing officer — Rank, name and designation</label>
-                                <input id="issuingOfficerRankNameDesignation" name="issuingOfficerRankNameDesignation" type="text" maxlength="200">
-                            </div>
-                        </div>
-                    </section>
+                    
 
                     <div class="indent-form-footer">
                         <p><span class="required-mark">*</span> Required to register a completed indent. A successful registration will be placed in the Clerk queue.</p>
@@ -266,8 +228,7 @@
         </main>
     </div>
 
-    <script src="/js/indent-registration.js"></script>
-
     <script src="/js/shared-sidebar.js"></script>
+    <script src="/js/indent-registration.js"></script>
 </body>
 </html>

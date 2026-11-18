@@ -168,6 +168,7 @@ function buildDetails(item) {
                 ["Time and date required", formatDateTime(item.requiredDateTime)],
                 ["Number of vehicles required", item.vehicleQuantity],
                 ["Vehicle type", item.vehicleType],
+                ["Type of load", item.typeOfLoad],
                 ["Where required", item.locationName],
                 ["Duration of employment", item.durationOfEmployment],
                 ["Destination", item.destination],
@@ -186,19 +187,6 @@ function buildDetails(item) {
                 ["Indenting Officer — Date", formatDate(item.indentingOfficerDate)],
                 ["OC/CO/Head of Branch — Station", item.certifyingOfficerStation],
                 ["OC/CO/Head of Branch — Date", formatDate(item.certifyingOfficerDate)]
-            ]
-        },
-        {
-            title: "Part II — STO's Transport Order",
-            fields: [
-                ["Hiring Transport Register Serial No.", item.hiringTransportRegisterSerialNumber],
-                ["Budget Head", item.budgetHead],
-                ["Transport supplied — date/time", formatDateTime(item.transportSupplyDateTime)],
-                ["Details of journey", item.detailsOfJourney],
-                ["Duration of duty (days/hours)", item.durationOfDutyDaysHours],
-                ["Order — Station", item.orderStation],
-                ["Order — Date", formatDate(item.orderDate)],
-                ["Issuing Officer — Rank, Name & Designation", item.issuingOfficerRankNameDesignation]
             ]
         },
         {

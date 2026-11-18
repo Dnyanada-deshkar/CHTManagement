@@ -124,6 +124,13 @@ async function submitIndent(event) {
     const vehicleId = Number(valueOf("vehicleId"));
     const locationId = Number(valueOf("whereRequiredLocationId"));
     const vehicleQuantity = Number(valueOf("vehicleQuantity"));
+    const typeOfLoad = valueOf("typeOfLoad").trim();
+
+    if (!typeOfLoad) {
+        showMessage("Please enter the type of load.", "error");
+        document.getElementById("typeOfLoad").focus();
+        return;
+    }
 
     if (!vehicleId || !locationId || !Number.isInteger(vehicleQuantity) || vehicleQuantity < 1) {
         showMessage("Select an active vehicle type and location, and enter a vehicle quantity of at least 1.", "error");
@@ -143,6 +150,7 @@ async function submitIndent(event) {
         requiredDateTime,
         vehicleQuantity,
         vehicleId,
+        typeOfLoad,
         whereRequiredLocationId: locationId,
         durationOfEmployment: valueOf("durationOfEmployment").trim(),
         destination: nullableText("destination"),
@@ -156,14 +164,6 @@ async function submitIndent(event) {
         indentingOfficerDate: nullableDate("indentingOfficerDate"),
         certifyingOfficerStation: nullableText("certifyingOfficerStation"),
         certifyingOfficerDate: nullableDate("certifyingOfficerDate"),
-        hiringTransportRegisterSerialNumber: nullableText("hiringTransportRegisterSerialNumber"),
-        budgetHead: nullableText("budgetHead"),
-        transportSupplyDateTime: nullableDateTime("transportSupplyDateTime"),
-        detailsOfJourney: nullableText("detailsOfJourney"),
-        durationOfDutyDaysHours: nullableText("durationOfDutyDaysHours"),
-        orderStation: nullableText("orderStation"),
-        orderDate: nullableDate("orderDate"),
-        issuingOfficerRankNameDesignation: nullableText("issuingOfficerRankNameDesignation")
     };
 
     setSaving(true);
@@ -180,7 +180,6 @@ async function submitIndent(event) {
 
         indentForm.reset();
         document.getElementById("vehicleQuantity").value = "1";
-        document.getElementById("budgetHead").value = "105F/1/255/01 & 02";
         await loadIndents();
         showMessage(`Indent log registered successfully. Log reference: ${created.indentId}. Status: ${created.status || "Pending with Clerk"}.`, "success");
         window.scrollTo({ top: 0, behavior: "smooth" });
@@ -239,10 +238,6 @@ function nullableDate(id) {
     return value === "" ? null : value;
 }
 
-function nullableDateTime(id) {
-    const value = valueOf(id);
-    return value === "" ? null : value;
-}
 
 async function getErrorMessage(response) {
     let data;

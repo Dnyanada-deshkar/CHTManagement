@@ -1,11 +1,10 @@
-﻿using CHTManagement.Data;
+using CHTManagement.Data;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace CHTManagement.Controllers
 {
-    // The Clerk can only view pending indent logs and approve them for CIO review.
     [Authorize(Roles = "CHT-Clerk")]
     [ApiController]
     [Route("api/indent-approval")]
@@ -13,16 +12,10 @@ namespace CHTManagement.Controllers
     {
         private const string PendingWithClerk = "Pending with Clerk";
         private const string PendingWithCio = "Pending with CIO";
-
         private readonly ApplicationDbContext _context;
 
-        public IndentApprovalController(ApplicationDbContext context)
-        {
-            _context = context;
-        }
+        public IndentApprovalController(ApplicationDbContext context) => _context = context;
 
-        // GET: /api/indent-approval/pending
-        // Only logs awaiting Clerk action are returned to the Clerk queue.
         [HttpGet("pending")]
         public async Task<IActionResult> GetPendingForClerk()
         {
@@ -41,10 +34,9 @@ namespace CHTManagement.Controllers
                     x.VehicleQuantity,
                     x.VehicleId,
                     VehicleType = x.Vehicle != null ? x.Vehicle.VehicleType : null,
+                    x.TypeOfLoad,
                     x.WhereRequiredLocationId,
-                    LocationName = x.WhereRequiredLocation != null
-                        ? x.WhereRequiredLocation.LocationName
-                        : null,
+                    LocationName = x.WhereRequiredLocation != null ? x.WhereRequiredLocation.LocationName : null,
                     x.DurationOfEmployment,
                     x.Destination,
                     x.OneWayDistance,
@@ -57,14 +49,6 @@ namespace CHTManagement.Controllers
                     x.IndentingOfficerDate,
                     x.CertifyingOfficerStation,
                     x.CertifyingOfficerDate,
-                    x.HiringTransportRegisterSerialNumber,
-                    x.BudgetHead,
-                    x.TransportSupplyDateTime,
-                    x.DetailsOfJourney,
-                    x.DurationOfDutyDaysHours,
-                    x.OrderStation,
-                    x.OrderDate,
-                    x.IssuingOfficerRankNameDesignation,
                     x.Status,
                     x.CreatedAt
                 })
@@ -73,35 +57,19 @@ namespace CHTManagement.Controllers
             return Ok(pendingIndents);
         }
 
-        // POST: /api/indent-approval/{id}/approve
-        // Approval advances the log to the CHT-CIO queue; it does not mean the CIO approved it.
         [HttpPost("{id:int}/approve")]
         public async Task<IActionResult> ApproveForCio(int id)
         {
-            var indent = await _context.Indents
-                .FirstOrDefaultAsync(x => x.IndentId == id);
-
+            var indent = await _context.Indents.FirstOrDefaultAsync(x => x.IndentId == id);
             if (indent == null)
-            {
                 return NotFound(new { message = "Indent log was not found." });
-            }
 
             if (!string.Equals(indent.Status, PendingWithClerk, StringComparison.Ordinal))
-            {
-                return Conflict(new
-                {
-                    message = "This indent log is no longer pending with the Clerk.",
-                    status = indent.Status
-                });
-            }
+                return Conflict(new { message = "This indent log is no longer pending with the Clerk.", status = indent.Status });
 
             indent.Status = PendingWithCio;
             indent.ClerkActionBy = User.Identity?.Name;
             indent.ClerkApprovedAt = DateTime.Now;
-
-
-
-
             await _context.SaveChangesAsync();
 
             return Ok(new

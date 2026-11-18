@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transport Utilization - CHT Management</title>
+    <link rel="stylesheet" href="/css/master.css">
+    <link rel="stylesheet" href="/css/indent-registration.css">
+    <link rel="stylesheet" href="/css/shared-sidebar.css">
+    <link rel="stylesheet" href="/css/transport-utilization.css">
+</head>
+<body>
+    <div class="app-shell">
+        <aside class="sidebar"></aside>
+        <main class="main-area">
+            <header class="topbar">
+                <button type="button" class="menu-button" id="menuButton" aria-label="Toggle navigation">☰</button>
+                <div class="topbar-right">
+                    <div class="user-profile">
+                        <div class="user-avatar"><span id="userInitial">U</span></div>
+                        <div class="user-info">
+                            <strong id="headerUsername">User</strong>
+                            <span id="headerRole">-</span>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <section class="page-content">
+                <div class="page-heading indent-page-heading">
+                    <div>
+                        <div class="breadcrumb">Workflow <span>/</span> Transport Utilization</div>
+                        <h1>Transport Utilization</h1>
+                        <p>Complete Part II of the Form for Hiring of Civil Transport for each confirmed physical vehicle.</p>
+                    </div>
+                    <button type="button" class="secondary-button" id="refreshButton">Refresh list</button>
+                </div>
+
+                <div class="tu-info-banner">
+                    <strong>Part II — To be Completed by Depot Unit Utilizing Transport.</strong>
+                    Vehicle registration and driver details are carried forward from Vehicle Demand Confirmation. Complete the receiving, journey, load, departure and officer certification details here.
+                </div>
+
+                <div id="pageMessage" class="page-message" role="status" aria-live="polite" hidden></div>
+
+                <div class="tu-stat-grid">
+                    <div class="tu-stat-card"><span>Awaiting utilization</span><strong id="awaitingCount">0</strong></div>
+                    <div class="tu-stat-card"><span>Utilization recorded</span><strong id="completedCount">0</strong></div>
+                    <div class="tu-stat-card"><span>Confirmed vehicles</span><strong id="totalCount">0</strong></div>
+                </div>
+
+                <section class="content-card tu-list-card">
+                    <div class="indent-section-heading tu-list-heading">
+                        <div>
+                            <span class="indent-kicker">TRANSPORT UTILIZATION REGISTER</span>
+                            <h2>Vehicle confirmations</h2>
+                            <p>One Transport Utilization Part-II record is maintained for each physical vehicle.</p>
+                        </div>
+                    </div>
+                    <div class="tu-toolbar">
+                        <input type="search" id="searchInput" placeholder="Search indent, vehicle, driver or unit..." autocomplete="off">
+                        <select id="statusFilter" aria-label="Filter by utilization status">
+                            <option value="all">All records</option>
+                            <option value="pending">Awaiting utilization</option>
+                            <option value="completed">Utilization recorded</option>
+                        </select>
+                    </div>
+                    <div class="table-wrapper">
+                        <table class="tu-table">
+                            <thead>
+                                <tr>
+                                    <th>LOG REF.</th>
+                                    <th>INDENT NUMBER</th>
+                                    <th>UNIT</th>
+                                    <th>TYPE OF LOAD</th>
+                                    <th>VEHICLE NO.</th>
+                                    <th>DRIVER</th>
+                                    <th>JOURNEY</th>
+                                    <th>STATUS</th>
+                                    <th>ACTION</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tableBody">
+                                <tr><td colspan="9" class="table-state">Loading vehicle confirmations...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="table-footer tu-table-footer"><span id="recordSummary">Loading...</span></div>
+                </section>
+            </section>
+        </main>
+    </div>
+
+    <!-- Part II form modal -->
+    <div class="modal-backdrop tu-modal-backdrop" id="utilizationModal" hidden>
+        <section class="tu-modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+            <header class="tu-modal-header">
+                <div>
+                    <span class="indent-kicker">FORM FOR HIRING OF CIVIL TRANSPORT</span>
+                    <h2 id="modalTitle">Transport Utilization — Part II</h2>
+                    <p>To be completed by Depot Unit Utilizing Transport.</p>
+                </div>
+                <button type="button" class="modal-close" id="closeModalButton" aria-label="Close">×</button>
+            </header>
+
+            <div id="sourceSummary" class="tu-source-summary"></div>
+            <div id="modalMessage" class="page-message" role="alert" aria-live="polite" hidden></div>
+
+            <form id="utilizationForm" novalidate>
+                <input type="hidden" id="vehicleDemandConfirmationId">
+
+                <section class="tu-form-section">
+                    <h3>Vehicle and Driver Details</h3>
+                    <p class="tu-section-note">These details are copied from the saved Vehicle Demand Confirmation to avoid re-entry or mismatch.</p>
+                    <div class="indent-field-grid">
+                        <div class="indent-field">
+                            <label for="vehicleRegistrationNumber">1. Registration No. of Vehicle</label>
+                            <input id="vehicleRegistrationNumber" type="text" readonly>
+                        </div>
+                        <div class="indent-field">
+                            <label for="driverName">2. Driver's Name</label>
+                            <input id="driverName" type="text" readonly>
+                        </div>
+                        <div class="indent-field">
+                            <label for="driverRegistrationNumber">Driver's Registration No. / Licence No.</label>
+                            <input id="driverRegistrationNumber" type="text" readonly>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="tu-form-section">
+                    <h3>Transport Received and Journey</h3>
+                    <div class="indent-field-grid">
+                        <div class="indent-field">
+                            <label for="transportReceivedDateTime">3. Time &amp; Date Transport Received <span class="required-mark">*</span></label>
+                            <input id="transportReceivedDateTime" type="datetime-local" required>
+                        </div>
+                        <div class="indent-field">
+                            <label for="transportReceivedNumber">Transport Received No. / Reference</label>
+                            <input id="transportReceivedNumber" type="text" maxlength="100" placeholder="Optional reference">
+                        </div>
+                        <div class="indent-field">
+                            <label for="journeyFrom">4. Details of journey — From <span class="required-mark">*</span></label>
+                            <input id="journeyFrom" type="text" maxlength="250" required>
+                        </div>
+                        <div class="indent-field">
+                            <label for="journeyTo">To <span class="required-mark">*</span></label>
+                            <input id="journeyTo" type="text" maxlength="250" required>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="tu-form-section">
+                    <h3>Stores / Personnel Loaded</h3>
+                    <div class="indent-field-grid">
+                        <div class="indent-field indent-field-wide">
+                            <label for="storesPersonnelLoadedDetails">5. Details of stores/personnel loaded <span class="required-mark">*</span></label>
+                            <textarea id="storesPersonnelLoadedDetails" rows="3" required></textarea>
+                        </div>
+                        <div class="indent-field">
+                            <label for="loadedTallySheetReference">6(a). Reference of Loaded Tally Sheet</label>
+                            <input id="loadedTallySheetReference" type="text" maxlength="150">
+                        </div>
+                        <div class="indent-field">
+                            <label for="rtVoucherReference">6(b). R&amp;T Voucher</label>
+                            <input id="rtVoucherReference" type="text" maxlength="150">
+                        </div>
+                        <div class="indent-field">
+                            <label for="transportLeftDepotDateTime">7. Time &amp; Date Transport Left Depot <span class="required-mark">*</span></label>
+                            <input id="transportLeftDepotDateTime" type="datetime-local" required>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="tu-form-section">
+                    <h3>Utilizing Unit Certification</h3>
+                    <div class="indent-field-grid">
+                        <div class="indent-field">
+                            <label for="utilizingUnitStation">Station (C/o 56 APO) <span class="required-mark">*</span></label>
+                            <input id="utilizingUnitStation" type="text" maxlength="100" required placeholder="e.g. Station C/o 56 APO">
+                        </div>
+                        <div class="indent-field">
+                            <label for="utilizingOfficerDate">Date <span class="required-mark">*</span></label>
+                            <input id="utilizingOfficerDate" type="date" required>
+                        </div>
+                        <div class="indent-field indent-field-wide">
+                            <label for="utilizingOfficerRankNameDesignation">Rank, Name &amp; Designation of Officer <span class="required-mark">*</span></label>
+                            <input id="utilizingOfficerRankNameDesignation" type="text" maxlength="200" required>
+                        </div>
+                        <div class="indent-field indent-field-wide">
+                            <label for="loadingSupervisedBy">Certification: Vehicle loaded under supervision of <span class="required-mark">*</span></label>
+                            <input id="loadingSupervisedBy" type="text" maxlength="150" required>
+                        </div>
+                        <div class="indent-field indent-field-wide">
+                            <label class="tu-checkbox-label">
+                                <input id="driverSignatureObtained" type="checkbox" required>
+                                Driver's signature obtained on the source form <span class="required-mark">*</span>
+                            </label>
+                            <small class="tu-help">This records that the physical form was signed; it is not an electronic signature.</small>
+                        </div>
+                    </div>
+                </section>
+
+                <footer class="tu-form-footer">
+                    <p><span class="required-mark">*</span> Required fields. Vehicle and driver identifiers are read-only and sourced from Vehicle Demand Confirmation.</p>
+                    <div>
+                        <button type="button" class="secondary-button" id="cancelButton">Cancel</button>
+                        <button type="submit" class="primary-button" id="saveButton">Save Transport Utilization</button>
+                    </div>
+                </footer>
+            </form>
+        </section>
+    </div>
+
+    <script src="/js/shared-sidebar.js"></script>
+    <script src="/js/transport-utilization.js"></script>
+</body>
+</html>

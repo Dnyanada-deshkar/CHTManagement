@@ -104,10 +104,6 @@ namespace CHTManagement.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IndentId"));
 
-                    b.Property<string>("BudgetHead")
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
                     b.Property<DateTime?>("CertifyingOfficerDate")
                         .HasColumnType("datetime2");
 
@@ -136,22 +132,11 @@ namespace CHTManagement.Migrations
                         .HasMaxLength(250)
                         .HasColumnType("nvarchar(250)");
 
-                    b.Property<string>("DetailsOfJourney")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("DurationOfDutyDaysHours")
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
                     b.Property<string>("DurationOfEmployment")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ExactNatureOfDutyWithAuthority")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("HiringTransportRegisterSerialNumber")
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
 
                     b.Property<DateTime?>("IndentDate")
                         .HasColumnType("datetime2");
@@ -167,19 +152,8 @@ namespace CHTManagement.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<string>("IssuingOfficerRankNameDesignation")
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
-
                     b.Property<decimal?>("OneWayDistance")
                         .HasColumnType("decimal(18,2)");
-
-                    b.Property<DateTime?>("OrderDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("OrderStation")
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("ReasonForUsingCHTOnSundayHoliday")
                         .HasColumnType("nvarchar(max)");
@@ -202,8 +176,9 @@ namespace CHTManagement.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<DateTime?>("TransportSupplyDateTime")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("TypeOfLoad")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
 
                     b.Property<string>("UnitName")
                         .HasMaxLength(100)
@@ -292,6 +267,107 @@ namespace CHTManagement.Migrations
                     b.HasKey("LocationTypeId");
 
                     b.ToTable("LocationTypes");
+                });
+
+            modelBuilder.Entity("CHTManagement.Models.TransportUtilization", b =>
+                {
+                    b.Property<int>("TransportUtilizationId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TransportUtilizationId"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatedBy")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("DriverName")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
+
+                    b.Property<string>("DriverRegistrationNumber")
+                        .IsRequired()
+                        .HasMaxLength(60)
+                        .HasColumnType("nvarchar(60)");
+
+                    b.Property<bool>("DriverSignatureObtained")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("JourneyFrom")
+                        .IsRequired()
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
+
+                    b.Property<string>("JourneyTo")
+                        .IsRequired()
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
+
+                    b.Property<string>("LoadedTallySheetReference")
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
+
+                    b.Property<string>("LoadingSupervisedBy")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
+
+                    b.Property<string>("RTVoucherReference")
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
+
+                    b.Property<string>("StoresPersonnelLoadedDetails")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("TransportLeftDepotDateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("TransportReceivedDateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("TransportReceivedNumber")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UpdatedBy")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<DateTime>("UtilizingOfficerDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UtilizingOfficerRankNameDesignation")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<string>("UtilizingUnitStation")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<int>("VehicleDemandConfirmationId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("VehicleRegistrationNumber")
+                        .IsRequired()
+                        .HasMaxLength(40)
+                        .HasColumnType("nvarchar(40)");
+
+                    b.HasKey("TransportUtilizationId");
+
+                    b.HasIndex("VehicleDemandConfirmationId")
+                        .IsUnique();
+
+                    b.ToTable("TransportUtilizations");
                 });
 
             modelBuilder.Entity("CHTManagement.Models.Vehicle", b =>
@@ -498,6 +574,15 @@ namespace CHTManagement.Migrations
                     b.HasOne("CHTManagement.Models.LocationType", null)
                         .WithMany()
                         .HasForeignKey("LocationTypeId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("CHTManagement.Models.TransportUtilization", b =>
+                {
+                    b.HasOne("CHTManagement.Models.VehicleDemandConfirmation", null)
+                        .WithOne()
+                        .HasForeignKey("CHTManagement.Models.TransportUtilization", "VehicleDemandConfirmationId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
